@@ -1,8 +1,7 @@
-import * as url from './url'
-import * as socket from './socket'
+import * as url from './url';
 
 
 export {
   url,
-  socket
 }
+

@@ -6,6 +6,7 @@ export const BotReducer = createReducer(
   initialState,
   on(actions.newConfiguration, (state, action) => ({
     ...state,
-    configuration: action.configuration
+    configuration: action.configuration,
+    activityLogs: [],
   })),
 )

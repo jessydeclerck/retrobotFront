@@ -16,7 +16,7 @@ export class BotApiService {
     return this.http.get<BotConfiguration>(url.configuration);
   }
 
-  public startHarvesting(order: HarvestOrder): Observable<any>{
-    return this.http.post(url.startHarvesting, JSON.stringify(order));
+  public startHarvesting(order: HarvestOrder): Observable<BotConfiguration>{
+    return this.http.post<BotConfiguration>(url.startHarvesting, JSON.stringify(order));
   }
 }

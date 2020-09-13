@@ -1,7 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {WebsocketService} from "../../shared/services/websocket.service";
-import {socket} from "../../shared/constants";
-
 
 @Component({
   selector: 'app-harvest',
@@ -10,19 +8,13 @@ import {socket} from "../../shared/constants";
 })
 export class HarvestComponent implements OnInit, OnDestroy {
 
-  constructor(private readonly websocketService: WebsocketService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.websocketService.initWebSocket().then(() => {
-      this.websocketService
-        .subscribe(socket.harvestNotification, (event) => {
 
-      });
-    });
   }
 
   ngOnDestroy(): void {
-    this.websocketService.unsubscribeToWebSocketEvent(socket.harvestNotification);
   }
 
 }

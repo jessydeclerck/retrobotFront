@@ -11,7 +11,16 @@ export const newConfiguration = createAction(
   props<{configuration: BotConfiguration}>()
 );
 
+export const subscribeToLogs = createAction(
+  '[Log] Subscribe Logs'
+);
+
+export const newLog = createAction(
+  '[Log] New Logs',
+  props<{log: string}>()
+);
+
 export const sendHarvestOrder = createAction(
-  '[BotConfiguration] Get',
+  '[Bot] Harvest',
   props<{harvestOrder: HarvestOrder}>()
 );
