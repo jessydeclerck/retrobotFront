@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~8.1.0",
     "@angular/platform-browser-dynamic": "~8.1.0",
     "@angular/router": "~8.1.0",
+    "@ngrx/store": "^10.0.0",
     "@wishtack/rx-scavenger": "^2.0.1",
     "net": "^1.0.2",
     "rxjs": "~6.4.0",
