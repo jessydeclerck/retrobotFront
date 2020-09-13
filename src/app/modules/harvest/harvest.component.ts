@@ -14,10 +14,9 @@ export class HarvestComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.websocketService.initWebSocket().then(() => {
-      this.websocketService.subscribe(socket.harvestNotification, (event) => {
-        /**
-         * Traitement
-         */
+      this.websocketService
+        .subscribe(socket.harvestNotification, (event) => {
+
       });
     });
   }

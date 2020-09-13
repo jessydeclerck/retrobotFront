@@ -5,7 +5,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/core/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/navbar/navbar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/modules/harvest/harvest.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/harvest/harvest.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/modules/harvest/harvest.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/harvest/harvest.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/modules/harvest/harvest.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/harvest/harvest.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/polyfills.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/polyfills.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +39,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.tabs" />
     <property name="ts.external.directory.path" value="C:\Users\Not Ultiko\WebstormProjects\retrobotFront\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -42,6 +48,15 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Not Ultiko\WebstormProjects\retrobotFront" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="start" />
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -53,7 +68,7 @@
       <updated>1599984789170</updated>
       <workItem from="1599984790208" duration="620000" />
       <workItem from="1599985436623" duration="755000" />
-      <workItem from="1599987001820" duration="1217000" />
+      <workItem from="1599987001820" duration="3047000" />
     </task>
     <servers />
   </component>
@@ -61,17 +76,37 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599985687342">
+    <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599988610109">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599985687342" />
+    <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599988610109" />
     <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1599987766120">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599987766120" />
+    <state width="1899" height="275" key="GridCell.Tab.0.bottom" timestamp="1599989106018">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="275" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599989106018" />
+    <state width="1899" height="275" key="GridCell.Tab.0.center" timestamp="1599989106018">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="275" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599989106018" />
+    <state width="1899" height="275" key="GridCell.Tab.0.left" timestamp="1599989106018">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="275" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599989106018" />
+    <state width="1899" height="275" key="GridCell.Tab.0.right" timestamp="1599989106018">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="275" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599989106018" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1599987162289">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599987162289" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1599988563180">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599988563180" />
   </component>
 </project>
