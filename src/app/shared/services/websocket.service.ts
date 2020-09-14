@@ -1,52 +1,20 @@
 import { Injectable } from '@angular/core';
-import { url } from '../constants'
-import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketService {
 
+  private websocket: WebSocket;
 
   constructor() { }
 
-  private stompClient;
-  public mapEndpointSubscription: Map<string, any> = new Map();
-
-  public async initWebSocket() {
-    /*return new Promise((resolve) => {
-      if (!this.stompClient) {
-        const ws = new SockJS(url.serverNotification);
-        this.stompClient = Stomp.over(ws);
-        this.stompClient.connect({}, resolve);
-      } else {
-        resolve();
-      }
-    });*/
+  public initWebSocket (): void {
+    this.websocket = new WebSocket('ws://localhost:8080');
   }
 
-  public async subscribe(name: string, fnc: (event) => void) {
-    const subscription = this.stompClient.subscribe(`/${name}`, (event) => {
-      fnc({...event, body: JSON.parse(event.body)})
-    });
-    this.mapEndpointSubscription.set(name, subscription);
-  }
-
-  public unsubscribeToWebSocketEvent(name: string) {
-    const subscription = this.mapEndpointSubscription.get(name);
-    if (subscription) {
-      subscription.unsubscribe();
-    }
-  }
-
-  public send(name: string, body: any) {
-    this.stompClient.send(`/app/socket/${name}`, {}, JSON.stringify(body));
-  }
-
-  public disconnect() {
-    if (this.stompClient !== null) {
-      this.stompClient.disconnect();
-    }
+  public closeWebSocket (): void {
+    this.websocket.close();
   }
 
 
