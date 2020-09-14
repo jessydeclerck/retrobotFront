@@ -46,3 +46,5 @@ testem.log
 Thumbs.db
 
 .idea/*
+
+/retrobot-win32-x64
