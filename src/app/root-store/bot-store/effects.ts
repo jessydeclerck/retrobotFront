@@ -20,23 +20,9 @@ export class BotEffects {
       this.botApiService.getCurrentConfiguration()
         .pipe(
           switchMap(configuration => [
-            actions.newConfiguration({configuration}),
-            actions.subscribeToLogs()
+            actions.newConfiguration({configuration})
           ])
         )
-      )
-  ));
-
-  subscribeToLogs$ = createEffect(() =>
-    this.action$.pipe(
-      ofType(actions.subscribeToLogs),
-      tap(() =>
-        this.websocketService.initWebSocket().then(() => {
-          this.websocketService
-            .subscribe(url.serverNotification, (event) => {
-              actions.newLog({log: event.body})
-            });
-        })
       )
   ));
 }

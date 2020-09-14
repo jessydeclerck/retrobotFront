@@ -4,18 +4,11 @@
     <list default="true" id="92966713-398e-4daf-b250-19b7cadebd18" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/modules/harvest/harvest.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/harvest/harvest.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/root-store/bot-store/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/root-store/bot-store/actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/root-store/bot-store/bot-store.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/root-store/bot-store/bot-store.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/root-store/bot-store/effects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/root-store/bot-store/effects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/root-store/bot-store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/root-store/bot-store/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/root-store/bot-store/reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/root-store/bot-store/reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/root-store/bot-store/state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/root-store/bot-store/state.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/shared/constants/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/constants/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/shared/constants/socket.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/shared/constants/url.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/constants/url.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/shared/services/bot-api.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/bot-api.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/shared/models/bot-configuration.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/models/bot-configuration.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/shared/services/websocket.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/services/websocket.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +37,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../angular-electron" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -77,7 +71,9 @@
       <updated>1599984789170</updated>
       <workItem from="1599984790208" duration="620000" />
       <workItem from="1599985436623" duration="755000" />
-      <workItem from="1599987001820" duration="10540000" />
+      <workItem from="1599987001820" duration="18830000" />
+      <workItem from="1600077861894" duration="1002000" />
+      <workItem from="1600078929070" duration="303000" />
     </task>
     <servers />
   </component>
@@ -93,26 +89,34 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599997300619" />
-    <state width="1899" height="275" key="GridCell.Tab.0.bottom" timestamp="1599996934911">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1600077969124">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="275" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599996934911" />
-    <state width="1899" height="275" key="GridCell.Tab.0.center" timestamp="1599996934911">
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1600077969124" />
+    <state width="1899" height="275" key="GridCell.Tab.0.bottom" timestamp="1600022968196">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="275" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599996934911" />
-    <state width="1899" height="275" key="GridCell.Tab.0.left" timestamp="1599996934911">
+    <state width="1899" height="275" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1600022968196" />
+    <state width="1899" height="275" key="GridCell.Tab.0.center" timestamp="1600022968196">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="275" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599996934911" />
-    <state width="1899" height="275" key="GridCell.Tab.0.right" timestamp="1599996934911">
+    <state width="1899" height="275" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1600022968196" />
+    <state width="1899" height="275" key="GridCell.Tab.0.left" timestamp="1600022968196">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="275" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599996934911" />
+    <state width="1899" height="275" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1600022968196" />
+    <state width="1899" height="275" key="GridCell.Tab.0.right" timestamp="1600022968196">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="275" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1600022968196" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1599987162289">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1599987162289" />
+    <state x="668" y="237" width="583" height="566" key="find.popup" timestamp="1600003861970">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="668" y="237" width="583" height="566" key="find.popup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1600003861970" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1599988563180">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

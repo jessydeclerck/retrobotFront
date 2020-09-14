@@ -4,5 +4,5 @@ export const configuration = `${bot}configuration`;
 
 export const startHarvesting = `${bot}harvest`;
 
-export const serverNotification = `${bot}socket/notifications`;
+export const serverNotification = `http://localhost:80/socket/notifications`;
 

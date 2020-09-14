@@ -1,29 +1,28 @@
 import { Injectable } from '@angular/core';
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
 import { url } from '../constants'
+import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketService {
 
+
   constructor() { }
 
-  private serverUrl = `${url.bot}socket`;
   private stompClient;
   public mapEndpointSubscription: Map<string, any> = new Map();
 
   public async initWebSocket() {
-    return new Promise((resolve) => {
+    /*return new Promise((resolve) => {
       if (!this.stompClient) {
-        const ws = new SockJS(this.serverUrl);
+        const ws = new SockJS(url.serverNotification);
         this.stompClient = Stomp.over(ws);
         this.stompClient.connect({}, resolve);
       } else {
         resolve();
       }
-    });
+    });*/
   }
 
   public async subscribe(name: string, fnc: (event) => void) {

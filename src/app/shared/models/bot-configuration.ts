@@ -1,6 +1,6 @@
 import {Material} from "./material";
 
 export interface BotConfiguration {
-  type: string;
+  activity: string;
   harvest?: Material[];
 }
