@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
+import {Store} from "@ngrx/store";
+import {RootStoreState} from "../../root-store";
+import {BotStoreActions} from "../../root-store/bot-store";
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketService {
 
-  private websocket: WebSocket;
+  private webSocket: WebSocket;
 
-  constructor() { }
-
-  public initWebSocket (): void {
-    this.websocket = new WebSocket('ws://localhost:8080');
+  constructor(private readonly store: Store<RootStoreState.State>) {
+    this.webSocket = new WebSocket('ws://localhost:80');
+    this.webSocket.onmessage = this.handleMessage;
   }
 
-  public closeWebSocket (): void {
-    this.websocket.close();
+  public sendMessage(message: any) {
+    this.webSocket.send(message);
   }
 
+  private handleMessage = (message) => {
+    this.store.dispatch(BotStoreActions.handleMessage({message}));
+  }
 
 }
+
 

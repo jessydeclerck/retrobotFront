@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {WebsocketService} from "../../shared/services/websocket.service";
 
 @Component({
   selector: 'app-harvest',

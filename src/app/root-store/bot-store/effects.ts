@@ -1,28 +1,12 @@
 import {Injectable} from "@angular/core";
-import {BotApiService} from "../../shared/services/bot-api.service";
-import {Actions, createEffect, ofType} from "@ngrx/effects";
-
-import * as actions from './actions';
-import {mergeMap, switchMap, tap} from "rxjs/operators";
-import {WebsocketService} from "../../shared/services/websocket.service";
-import {url} from "../../shared/constants";
+import {Actions, } from "@ngrx/effects";
+import {Store} from "@ngrx/store";
+import {RootStoreState} from "../index";
 
 @Injectable()
 export class BotEffects {
   constructor(private action$: Actions,
-              private botApiService: BotApiService,
-              private websocketService: WebsocketService) {}
+              private readonly store: Store<RootStoreState.State>) {}
 
-  getConfiguration$ = createEffect( () =>
-    this.action$.pipe(
-      ofType(actions.getConfiguration),
-      mergeMap(action =>
-      this.botApiService.getCurrentConfiguration()
-        .pipe(
-          switchMap(configuration => [
-            actions.newConfiguration({configuration})
-          ])
-        )
-      )
-  ));
+
 }

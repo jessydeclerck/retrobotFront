@@ -1,8 +1,9 @@
 import * as BotStoreState from './state';
-import * as BotStoreAction from './actions';
-//import * as BotStoreState from './state';
+import * as BotStoreActions from './actions';
+import * as BotStoreSelectors from './selectors';
 
 export {
   BotStoreState,
-  BotStoreAction
+  BotStoreActions,
+  BotStoreSelectors
 }

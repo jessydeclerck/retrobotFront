@@ -4,9 +4,5 @@ import * as actions from './actions';
 
 export const BotReducer = createReducer(
   initialState,
-  on(actions.newConfiguration, (state, action) => ({
-    ...state,
-    configuration: action.configuration,
-    activityLogs: [],
-  })),
+
 );
