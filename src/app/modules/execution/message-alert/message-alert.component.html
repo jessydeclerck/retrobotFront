@@ -1,0 +1,9 @@
+<h3> Etre alerté par les messages de type</h3>
+
+<mat-chip-list multiple>
+  <mat-chip *ngFor="let type of messageTypes | keyvalue"
+            (click)="AlertMessageType(type.key)" color="primary"
+            [selected]="(selectedAlerts$ | async)?.includes(type.key)">{{type.value}}</mat-chip>
+</mat-chip-list>
+
+<h6>Nous ne sommes pas responsable de votre banissement si vous ne répondez pas aux messages ;)</h6>

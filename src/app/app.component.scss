@@ -1,0 +1,11 @@
+::ng-deep .flex {
+  display: flex;
+}
+
+::ng-deep .space-around {
+  justify-content: space-around;
+}
+
+::ng-deep .panel {
+  margin-left: 2vw;
+}

@@ -13,10 +13,6 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'retrobot';
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.webSocketService.sendMessage('aaa')
-    }, 1500);
-
   }
 
   ngOnDestroy(): void {

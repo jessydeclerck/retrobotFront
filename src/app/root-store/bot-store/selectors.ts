@@ -1,5 +1,4 @@
-import {State} from "./state";
+import {State} from "../state";
 
-export const selectMessageQueue = (state: State) => state.messagesQueue;
+export const selectMessageAlert = (state: State) => state.bot.messageAlerts;
 
-export const selectWebSocket = (state: State) => state.webSocket;

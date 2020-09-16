@@ -17,6 +17,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/harvest/harvest.module').then(m => m.HarvestModule),
   },
   {
+    path: 'run',
+    loadChildren: () => import('./modules/execution/execution.module').then(m => m.ExecutionModule),
+  },
+  {
     path: '**',
     redirectTo: 'home'
   },
