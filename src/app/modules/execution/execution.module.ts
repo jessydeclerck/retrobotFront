@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { ExecutionRoutingModule } from './execution-routing.module';
 import { ExecutionComponent } from './execution.component';
-import { MessageAlertComponent } from './message-alert/message-alert.component';
+import { MessageAlertComponent } from './components/message-alert/message-alert.component';
 import {MatChipsModule} from "@angular/material/chips";
+import { LootComponent } from './components/loot/loot.component';
+import { LogsComponent } from './components/logs/logs.component';
 
 
 @NgModule({
-  declarations: [ExecutionComponent, MessageAlertComponent],
+  declarations: [ExecutionComponent, MessageAlertComponent, LootComponent, LogsComponent],
   imports: [
     CommonModule,
     ExecutionRoutingModule,

@@ -5,6 +5,7 @@ import {RootStoreState} from "../index";
 import * as actions from './actions';
 import {map, tap, withLatestFrom} from "rxjs/operators";
 import {BotStoreSelectors} from "./index";
+import {MessageType} from "../../shared/enums/message-type.enum";
 
 @Injectable()
 export class BotEffects {
@@ -17,7 +18,7 @@ export class BotEffects {
     withLatestFrom(this.store.select(BotStoreSelectors.selectMessageAlert)),
     map(([action, messageAlert]) => {
       if (messageAlert.includes(action.newMessage.messageType)) {
-        return actions.alertUser({alert: 'a'});
+        return actions.alertUser({alert: `Message ${MessageType[action.newMessage.messageType]} de ${action.newMessage.from} : ${action.newMessage.content}`});
       } else {
         return actions.doNothing();
       }

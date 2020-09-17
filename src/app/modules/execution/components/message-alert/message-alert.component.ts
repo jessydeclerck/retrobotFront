@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MessageType} from "../../../shared/enums/message-type.enum";
+import {MessageType} from "../../../../shared/enums/message-type.enum";
 import {Store} from "@ngrx/store";
-import {RootStoreState} from "../../../root-store";
-import {BotStoreActions, BotStoreSelectors} from "../../../root-store/bot-store";
+import {RootStoreState} from "../../../../root-store";
+import {BotStoreActions, BotStoreSelectors} from "../../../../root-store/bot-store";
 import {Observable} from "rxjs";
 
 @Component({

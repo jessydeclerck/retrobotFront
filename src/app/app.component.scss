@@ -2,6 +2,10 @@
   display: flex;
 }
 
+::ng-deep .column {
+  flex-direction: column;
+}
+
 ::ng-deep .space-around {
   justify-content: space-around;
 }

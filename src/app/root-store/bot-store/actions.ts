@@ -1,5 +1,7 @@
 import {createAction, props} from "@ngrx/store";
 import {NewIncomingMessage} from "../../shared/models/socket-messages/new-incoming-message";
+import {Gathering} from "../../shared/models/socket-messages/gathering";
+import {Gathered} from "../../shared/models/socket-messages/gathered";
 
 
 export const handleMessage = createAction(
@@ -11,6 +13,21 @@ export const addOrRemoveMessageAlert = createAction(
   '[Message Alert] Add or Remove',
   props<{messageType: string}>()
 );
+
+export const startGathering = createAction(
+  '[Communication] Start Gathering',
+  props<{gatheringNotif: Gathering}>()
+);
+
+export const stopGathering = createAction(
+  '[Communication] Stop Gathering',
+  props<{gatheredNotif: Gathered}>()
+);
+
+
+
+
+
 
 export const alertUser = createAction(
   '[UI] Alert User',

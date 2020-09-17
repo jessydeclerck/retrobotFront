@@ -1,0 +1,18 @@
+<table *ngIf="loot$ | async as loot">
+  <thead>
+    <tr>
+      <th>Ressource</th>
+      <th>Quantité</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let resource of loot | keyvalue">
+      <td>
+        {{resource.key}}
+      </td>
+      <td>
+        {{resource.value}}
+      </td>
+    </tr>
+  </tbody>
+</table>
