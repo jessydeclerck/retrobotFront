@@ -21,6 +21,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/execution/execution.module').then(m => m.ExecutionModule),
   },
   {
+    path: 'map',
+    loadChildren: () => import('./modules/map/map.module').then(m => m.MapModule),
+  },
+  {
     path: '**',
     redirectTo: 'home'
   },
