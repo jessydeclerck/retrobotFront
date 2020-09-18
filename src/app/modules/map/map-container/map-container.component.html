@@ -1,4 +1,6 @@
-<canvas #mapCanvas width="6666" height="6666">
+<canvas #mapCanvas [width]="mapConfig.width * mapConfig.mapShardWidth * mapConfig.scale"
+                    [height]="mapConfig.height * mapConfig.mapShardHeight * mapConfig.scale"
+                    (click)="clic($event)">
 
 </canvas>
 
