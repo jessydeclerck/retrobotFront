@@ -8,7 +8,7 @@ export const mapfiles = [
 '1-7.png',
 '1-8.png',
 '1-9.png',
-'10-10.png',
+'4-11.png',
 '2-0.png',
 '2-1.png',
 '2-10.png',
@@ -70,5 +70,5 @@ export const mapfiles = [
 '8-7.png',
 '8-8.png',
 '8-9.png',
-'9-10.png',
+'3-11.png',
 ]

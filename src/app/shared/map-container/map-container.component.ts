@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import { mapfiles } from '../../../shared/constants/mapfiles'
+import { mapfiles } from '../constants/mapfiles'
 
 @Component({
   selector: 'app-map-container',
@@ -56,9 +56,19 @@ export class MapContainerComponent implements AfterViewInit {
     }
   }
   public clic(event): void {
-    console.log(event);
+    const x = -90 + Math.floor(event.layerX / this.cellConfig.cellWidth);
+    const y = -120 + Math.floor(event.layerY / this.cellConfig.cellHeight);
+    alert(x + ' ; ' + y);
 
-    this.ctx.fillRect(event.layerX, event.layerY, 5, 5);
+  }
+
+  public zoom(event): void {
+    this.mapConfig.scale += event.deltaY * 0.002;
+    this.cellConfig = {
+      cellHeight: this.mapConfig.mapShardHeight / this.mapConfig.cellsByRowOrCol * this.mapConfig.scale,
+      cellWidth: this.mapConfig.mapShardWidth / this.mapConfig.cellsByRowOrCol * this.mapConfig.scale,
+    }
+    this.drawMap();
   }
 
   ngAfterViewInit(): void {
