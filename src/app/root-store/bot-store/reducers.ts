@@ -18,6 +18,13 @@ export const BotReducer = createReducer(
     loot: setNewLoot(state.loot, state.looting, action.gatheredNotif.amount),
     activityLogs: [...state.activityLogs, `Quantité récoltée ${action.gatheredNotif.amount}`],
     looting: null
+  })),
+  on(actions.newMap, (state, action) => ({
+    ...state,
+    coordinates: {
+      x: action.newMapNotif.x,
+      y: action.newMapNotif.y
+    }
   }))
 );
 

@@ -8,4 +8,6 @@ export const loot = (state: State) => state.bot.loot;
 
 export const logs = (state: State) => state.bot.activityLogs;
 
+export const coordinates = (state: State) => state.bot.coordinates;
+
 

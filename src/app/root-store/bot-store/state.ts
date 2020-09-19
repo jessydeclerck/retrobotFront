@@ -1,11 +1,13 @@
 import {BotConfiguration} from "../../shared/models/bot-configuration";
+import {CellCoordinates} from "../../shared/models/cell-coordinates";
 
 export interface State {
   configuration: BotConfiguration;
   activityLogs: string[];
   messageAlerts: string[];
-  looting?: number
-  loot: any
+  looting?: number;
+  coordinates: CellCoordinates;
+  loot: any;
 }
 
 export const initialState: State = {
@@ -13,4 +15,8 @@ export const initialState: State = {
   activityLogs: [],
   messageAlerts: [],
   loot: {},
+  coordinates: {
+    x: 0,
+    y: 0,
+  }
 }

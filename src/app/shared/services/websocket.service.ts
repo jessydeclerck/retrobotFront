@@ -5,6 +5,7 @@ import {BotStoreActions} from "../../root-store/bot-store";
 import {NewIncomingMessage} from "../models/socket-messages/new-incoming-message";
 import {Gathering} from "../models/socket-messages/gathering";
 import {Gathered} from "../models/socket-messages/gathered";
+import {NewMap} from "../models/socket-messages/new-map";
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,10 @@ export class WebsocketService {
       case 'gathered':
         const gatheredNotif = new Gathered(parsedMessage);
         this.store.dispatch(BotStoreActions.stopGathering({gatheredNotif}));
+        break;
+      case 'map':
+        const newMapNotif = new NewMap(parsedMessage);
+        this.store.dispatch(BotStoreActions.newMap({newMapNotif}));
         break;
       default:
         alert(`Pouvez-vous transmettre aux dev que la petite chaussette ${parsedMessage.type} est cassée SVP ?`);
