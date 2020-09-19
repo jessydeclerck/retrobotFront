@@ -7,16 +7,20 @@ import { MessageAlertComponent } from './components/message-alert/message-alert.
 import {MatChipsModule} from "@angular/material/chips";
 import { LootComponent } from './components/loot/loot.component';
 import { LogsComponent } from './components/logs/logs.component';
-import {SharedModule} from "../../shared/shared.module";
+import {SharedModule} from '../../shared/shared.module';
+import {MatTableModule} from "@angular/material/table";
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
   declarations: [ExecutionComponent, MessageAlertComponent, LootComponent, LogsComponent],
-    imports: [
-        CommonModule,
-        ExecutionRoutingModule,
-        MatChipsModule,
-        SharedModule
-    ]
+  imports: [
+    CommonModule,
+    ExecutionRoutingModule,
+    MatChipsModule,
+    SharedModule,
+    MatTableModule,
+    MatCardModule,
+  ]
 })
 export class ExecutionModule { }

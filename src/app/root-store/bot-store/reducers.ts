@@ -1,6 +1,7 @@
 import {createReducer, on} from "@ngrx/store";
 import {initialState} from "./state";
 import * as actions from './actions';
+import {resourcesData} from "../../shared/constants/resourcesData";
 
 export const BotReducer = createReducer(
   initialState,
@@ -10,7 +11,7 @@ export const BotReducer = createReducer(
   })),
   on(actions.startGathering, (state, action) => ({
     ...state,
-    activityLogs: [...state.activityLogs, `Récolte de la ressource ${action.gatheringNotif.resource}`],
+    activityLogs: [...state.activityLogs, `Récolte de la ressource ${resourcesData[action.gatheringNotif.resource].name}`],
     looting: action.gatheringNotif.resource
   })),
   on(actions.stopGathering, (state, action) => ({
