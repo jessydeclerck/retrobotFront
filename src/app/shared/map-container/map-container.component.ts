@@ -55,7 +55,7 @@ export class MapContainerComponent implements AfterViewInit {
       }
     }
   }
-  public clic(event): void {
+  public click(event): void {
     const x = -90 + Math.floor(event.layerX / this.cellConfig.cellWidth);
     const y = -120 + Math.floor(event.layerY / this.cellConfig.cellHeight);
     alert(x + ' ; ' + y);

@@ -1,9 +1,10 @@
-<div (wheel)="zoom($event)" style="width: 1000px; height: 1000px; overflow: hidden">
+<drag-scroll (wheel)="$event.preventDefault();zoom($event)" style="width: 40vw; height: 35vh"
+              [scrollbar-hidden]="true">
   <canvas #mapCanvas  [width]="mapConfig.width * mapConfig.mapShardWidth * mapConfig.scale"
           [height]="mapConfig.height * mapConfig.mapShardHeight * mapConfig.scale"
-          (click)="clic($event)">
+          (click)="click($event)">
   </canvas>
-</div>
+</drag-scroll>
 
 
 
