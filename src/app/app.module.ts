@@ -9,9 +9,9 @@ import {RootStoreModule} from "./root-store/root-store.module";
 import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+    declarations: [
+      AppComponent
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -20,7 +20,8 @@ import {HttpClientModule} from "@angular/common/http";
         RootStoreModule,
         HttpClientModule,
     ],
-  providers: [],
-  bootstrap: [AppComponent]
+    providers: [],
+    exports: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,12 @@
+<div>
+  <drag-scroll  #mapContainer
+                id="mapContainer"
+                   (wheel)="$event.preventDefault();zoom($event)"
+                   [scrollbar-hidden]="true">
+    <canvas #mapCanvas  [width]="mapConfig.width * mapConfig.mapShardWidth * mapConfig.scale"
+            [height]="mapConfig.height * mapConfig.mapShardHeight * mapConfig.scale"
+            (click)="click($event)">
+    </canvas>
+  </drag-scroll>
+</div>
+
