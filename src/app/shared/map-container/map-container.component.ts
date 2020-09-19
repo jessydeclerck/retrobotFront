@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { mapfiles } from '../constants/mapfiles'
+import {DragScrollComponent} from "ngx-drag-scroll";
 
 @Component({
   selector: 'app-map-container',
@@ -10,6 +11,8 @@ export class MapContainerComponent implements AfterViewInit {
 
   ctx: CanvasRenderingContext2D;
   images: any[] = [];
+
+  @ViewChild('mapContainer', {read: DragScrollComponent}) ds: DragScrollComponent;
 
   public mapConfig = {
     height: 13,
@@ -29,10 +32,6 @@ export class MapContainerComponent implements AfterViewInit {
   constructor() { }
 
 
-  private drawMapAndGrid(): void {
-    this.drawMap();
-  }
-
   private drawMap(): void {
     mapfiles.forEach( (map, index) => {
       const coords = map.split('.png')[0].split('-');
@@ -42,7 +41,7 @@ export class MapContainerComponent implements AfterViewInit {
         const y = newMap.height * parseInt(coords[1]) * this.mapConfig.scale;
         this.ctx.drawImage(newMap, x, y, newMap.width* this.mapConfig.scale, newMap.height * this.mapConfig.scale);
         this.drawCells(x, y)
-      }
+      };
       newMap.src = '/assets/img/map/' + map;
       this.images.push(newMap);
     });
@@ -71,9 +70,13 @@ export class MapContainerComponent implements AfterViewInit {
     this.drawMap();
   }
 
+  scroll(x = 3000, y = 3000){
+    document.getElementsByClassName('drag-scroll-content')[0].scrollTo(x, y)
+  }
+
   ngAfterViewInit(): void {
     this.ctx  = this.mapRef.nativeElement.getContext('2d');
-    this.drawMapAndGrid();
+    this.drawMap();
   }
 
 }
