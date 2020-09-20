@@ -13,8 +13,5 @@ export const initialState: State = {
   activityLogs: [],
   messageAlerts: [],
   loot: {},
-  coordinates: {
-    x: 0,
-    y: 0,
-  },
+  coordinates: null,
 }

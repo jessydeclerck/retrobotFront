@@ -3,11 +3,12 @@ import { mapfiles } from '../constants/mapfiles'
 import {DragScrollComponent} from "ngx-drag-scroll";
 import {Store} from "@ngrx/store";
 import {RootStoreState} from "../../root-store";
-import {Observable} from "rxjs";
+import {combineLatest, Observable} from "rxjs";
 import {CellCoordinates} from "../models/cell-coordinates";
 import {BotStoreSelectors} from "../../root-store/bot-store";
 import {map, take} from "rxjs/operators";
 import {coordinates} from "../../root-store/bot-store/selectors";
+import {ScriptStoreSelectors} from "../../root-store/script-store";
 
 @Component({
   selector: 'app-map-container',
@@ -48,8 +49,11 @@ export class MapContainerComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.ctx  = this.mapRef.nativeElement.getContext('2d');
     this.drawMap();
-    this.scroll(-2,0);
-    this.handlePosition();
+    setTimeout(() => {
+      this.scroll(-2,0);
+      this.handleObservables();
+      }, 200);
+
   }
 
 
@@ -96,6 +100,8 @@ export class MapContainerComponent implements AfterViewInit {
    * Appellée à la fin de l'affichage des parties de carte pour dessiner la grille correspondante à cette partie de carte
    */
   private drawCells(x, y): void {
+    this.ctx.lineWidth = 1;
+    this.ctx.strokeStyle = '#000000';
     for (let i = 0 ; i < this.mapConfig.cellsByRowOrCol ; i++){
       for (let j = 0 ; j < this.mapConfig.cellsByRowOrCol ; j ++) {
         this.ctx.strokeRect(x + i * this.cellConfig.cellWidth, y + j * this.cellConfig.cellHeight, this.cellConfig.cellWidth, this.cellConfig.cellHeight)
@@ -106,18 +112,6 @@ export class MapContainerComponent implements AfterViewInit {
   public zoom(event): void {
     /*this.mapConfig.scale += event.deltaY * 0.002;
     this.drawMap();*/
-  }
-
-  /**
-   * Dessine un cercle rouge à la position du joueur
-   */
-  private drawPosition(x, y): void{
-    this.ctx.fillStyle= '#CD5C5C';
-    this.ctx.beginPath();
-    this.ctx.arc((x + 90) * this.cellConfig.cellWidth + this.cellConfig.cellWidth / 2,
-      y + (y + 120 + 1) * this.cellConfig.cellHeight + this.cellConfig.cellHeight / 2, 10, 0,  2 * Math.PI);
-    this.ctx.fill();
-    this.ctx.stroke();
   }
 
 
@@ -141,15 +135,108 @@ export class MapContainerComponent implements AfterViewInit {
       (y + 120) * this.cellConfig.cellHeight - mapContainer.clientHeight /2 );
   }
 
-
-  private handlePosition(): void {
-    if (this.displayPosition) {
-      this.store.select(BotStoreSelectors.coordinates).subscribe((coordinates) => {
-        this.redrawMap();
-        this.drawPosition(coordinates.x, coordinates.y);
+  private handleObservables(): void {
+    combineLatest([
+      this.store.select(ScriptStoreSelectors.selectBankMap),
+      this.store.select(ScriptStoreSelectors.selectStartMap),
+      this.store.select(ScriptStoreSelectors.selectGatherPath),
+      this.store.select(ScriptStoreSelectors.selectBankPath),
+      this.store.select(BotStoreSelectors.coordinates),
+    ]).subscribe(([bankMap, startMap, gatherPath, bankPath, coordinates]) => {
+      this.redrawMap();
+      if (this.displayPosition && coordinates){
+        this.drawCircleInCell(coordinates.x, coordinates.y, '#CD5C5C');
         this.scroll(coordinates.x, coordinates.y);
+      }
+      if(bankMap) {
+        this.drawCircleInCell(bankMap.x, bankMap.y, '#e7b533')
+      }
+      if(startMap) {
+        this.drawCircleInCell(startMap.x, startMap.y, '#01ff22')
+      }
+      Object.keys(gatherPath).forEach((map) => {
+        this.drawGatherPathArrow(map, gatherPath[map].direction, gatherPath[map].gather ? '#0f8603' : '#0040ff');
       });
-    }
+      Object.keys(bankPath).forEach((map) => {
+        this.drawGatherPathArrow(map, bankPath[map].direction, '#fc0000', true);
+      });
+    });
   }
+
+
+  private drawGatherPathArrow(map, direction, hexColor, isBank = false): void {
+    this.ctx.lineWidth = 3;
+    const x = parseInt(map.split(',')[0]);
+    const y = parseInt(map.split(',')[1]);
+    this.ctx.beginPath();
+    const offsetCoef = isBank ? 3 : 1;
+    switch (direction){
+      case 'right':
+        this.drawArrow(
+          (x + 90) * this.cellConfig.cellWidth,
+          (y + 120) * this.cellConfig.cellHeight + this.cellConfig.cellHeight * offsetCoef / 4,
+          (x + 90) * this.cellConfig.cellWidth + this.cellConfig.cellWidth,
+          (y + 120) * this.cellConfig.cellHeight + this.cellConfig.cellHeight * offsetCoef / 4,
+          hexColor);
+        break;
+      case 'left':
+        this.drawArrow(
+          (x + 90) * this.cellConfig.cellWidth + this.cellConfig.cellWidth,
+          (y + 120) * this.cellConfig.cellHeight + this.cellConfig.cellHeight * offsetCoef / 4,
+          (x + 90) * this.cellConfig.cellWidth,
+          (y + 120) * this.cellConfig.cellHeight + this.cellConfig.cellHeight * offsetCoef/ 4,
+          hexColor);
+        break;
+      case 'top':
+        this.drawArrow(
+          (x + 90) * this.cellConfig.cellWidth + this.cellConfig.cellWidth * offsetCoef / 4,
+          (y + 120) * this.cellConfig.cellHeight + this.cellConfig.cellHeight,
+          (x + 90) * this.cellConfig.cellWidth + this.cellConfig.cellWidth * offsetCoef / 4,
+          (y + 120) * this.cellConfig.cellHeight,
+          hexColor);
+        break;
+      case 'bottom':
+        this.drawArrow(
+          (x + 90) * this.cellConfig.cellWidth + this.cellConfig.cellWidth * offsetCoef / 4,
+          (y + 120) * this.cellConfig.cellHeight,
+          (x + 90) * this.cellConfig.cellWidth + this.cellConfig.cellWidth * offsetCoef / 4,
+          (y + 120) * this.cellConfig.cellHeight + this.cellConfig.cellHeight,
+          hexColor);
+        break;
+    }
+    this.ctx.stroke();
+
+  }
+
+
+
+
+  /**
+   * Dessine un cercle
+   */
+  private drawCircleInCell(x, y, hexColor): void{
+    this.ctx.fillStyle = hexColor;
+    this.ctx.beginPath();
+    this.ctx.arc((x + 90) * this.cellConfig.cellWidth + this.cellConfig.cellWidth / 2,
+      (y + 120) * this.cellConfig.cellHeight + this.cellConfig.cellHeight / 2, 10, 0,  2 * Math.PI);
+    this.ctx.fill();
+    this.ctx.stroke();
+  }
+
+
+  private drawArrow(fromx, fromy, tox, toy, hexColor) {
+    this.ctx.strokeStyle = hexColor;
+    const headlen = 10; // length of head in pixels
+    const dx = tox - fromx;
+    const dy = toy - fromy;
+    const angle = Math.atan2(dy, dx);
+    this.ctx.moveTo(fromx, fromy);
+    this.ctx.lineTo(tox, toy);
+    this.ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+    this.ctx.moveTo(tox, toy);
+    this.ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+  }
+
+
 
 }
