@@ -2,18 +2,19 @@ import {Injectable} from '@angular/core';
 import {BotConfiguration} from "../models/bot-configuration";
 import {CellCoordinates} from "../models/cell-coordinates";
 import {mapId} from "../constants/mapId";
+import {WebsocketService} from "./websocket.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor() {
+  constructor(private readonly websocket: WebsocketService) {
   }
 
   public useScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any): void {
     const script = this.prepareScript(toGather, bankMap, startMap, gatherPath, bankPath);
-    console.log(JSON.stringify(script));
+    this.websocket.sendMessage(JSON.stringify(script));
   }
 
   private prepareScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any): BotConfiguration {
@@ -27,7 +28,6 @@ export class DataService {
   }
 
   preparePath(path: any, mapId: any): any {
-    console.log(mapId);
     const preparedPath = {};
     Object.keys(path).forEach(map => {
       const mapCoords = map.split(',');
