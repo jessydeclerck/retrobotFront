@@ -1,6 +1,7 @@
-import {Material} from "./material";
-
 export interface BotConfiguration {
-  activity: string;
-  harvest?: Material[];
+  toGather: string[];
+  startMapId: string;
+  bankMapId: string;
+  gatherPath: any;
+  bankPath: any;
 }

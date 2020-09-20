@@ -11,6 +11,7 @@ import { MapBuilderComponent } from './components/map-builder/map-builder.compon
 import {SharedModule} from "../../shared/shared.module";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import {MatIconModule} from "@angular/material/icon";
     FormsModule,
     SharedModule,
     MatIconModule,
+    MatButtonModule,
   ]
 })
 export class HarvestModule { }

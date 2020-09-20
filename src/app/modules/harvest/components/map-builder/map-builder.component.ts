@@ -30,11 +30,11 @@ export class MapBuilderComponent {
         break;
       case 'move':
       case 'harvest':
-        newMap[`${cell.x};${cell.y}`] = {direction: this.direction, gather: this.drawPathMode === 'harvest'};
+        newMap[`${cell.x},${cell.y}`] = {direction: this.direction, gather: this.drawPathMode === 'harvest'};
         this.store.dispatch(ScriptStoreActions.addMapToPath({newMap}));
         break;
       case 'bank':
-        newMap[`${cell.x};${cell.y}`] = {direction: this.direction};
+        newMap[`${cell.x},${cell.y}`] = {direction: this.direction};
         this.store.dispatch(ScriptStoreActions.addMapToBankPath({newMap}));
         break;
       default:
