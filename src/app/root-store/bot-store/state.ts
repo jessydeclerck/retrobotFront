@@ -2,7 +2,6 @@ import {BotConfiguration} from "../../shared/models/bot-configuration";
 import {CellCoordinates} from "../../shared/models/cell-coordinates";
 
 export interface State {
-  configuration: BotConfiguration;
   activityLogs: string[];
   messageAlerts: string[];
   looting?: number;
@@ -11,12 +10,11 @@ export interface State {
 }
 
 export const initialState: State = {
-  configuration: null,
   activityLogs: [],
   messageAlerts: [],
   loot: {},
   coordinates: {
     x: 0,
     y: 0,
-  }
+  },
 }

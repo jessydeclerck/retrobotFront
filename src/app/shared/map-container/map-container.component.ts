@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { mapfiles } from '../constants/mapfiles'
 import {DragScrollComponent} from "ngx-drag-scroll";
 import {Store} from "@ngrx/store";
@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import {CellCoordinates} from "../models/cell-coordinates";
 import {BotStoreSelectors} from "../../root-store/bot-store";
 import {map, take} from "rxjs/operators";
+import {coordinates} from "../../root-store/bot-store/selectors";
 
 @Component({
   selector: 'app-map-container',
@@ -15,10 +16,14 @@ import {map, take} from "rxjs/operators";
 })
 export class MapContainerComponent implements AfterViewInit {
 
+  @Input()
+  displayPosition: boolean;
+
+  @Output()
+  clickOnCell: EventEmitter<CellCoordinates> = new EventEmitter<CellCoordinates>();
+
   private ctx: CanvasRenderingContext2D;
   private images: any[] = [];
-
-  coordinates$: Observable<CellCoordinates> = this.store.select(BotStoreSelectors.coordinates);
 
   @ViewChild('mapContainer', {read: DragScrollComponent}) ds: DragScrollComponent;
 
@@ -27,7 +32,7 @@ export class MapContainerComponent implements AfterViewInit {
     width:10,
     mapShardHeight: 345,
     mapShardWidth: 600,
-    cellsByRowOrCol: 15, //Because ce n'est pas un carré mais les cellules non plus are not des carrés
+    cellsByRowOrCol: 15,
     scale: 1
   }
 
@@ -36,17 +41,21 @@ export class MapContainerComponent implements AfterViewInit {
 
   constructor(private readonly store: Store<RootStoreState.State>) { }
 
+  /**
+   * Lancé après l'initialisation de la vue pour que le canvas soit affiché et que
+   * this.mapRef ne soit pas undefined
+   */
   ngAfterViewInit(): void {
     this.ctx  = this.mapRef.nativeElement.getContext('2d');
     this.drawMap();
-    this.coordinates$.subscribe((coordinates) => {
-      this.redrawMap();
-      this.drawPosition(coordinates.x, coordinates.y);
-      this.scroll(coordinates.x, coordinates.y);
-    });
+    this.scroll(-2,0);
+    this.handlePosition();
   }
 
 
+  /**
+   * Va aller charger les images de la carte une fois
+   */
   private drawMap(): void {
     this.cellConfig = {
       cellHeight: Math.round(this.mapConfig.mapShardHeight / this.mapConfig.cellsByRowOrCol * this.mapConfig.scale),
@@ -58,6 +67,10 @@ export class MapContainerComponent implements AfterViewInit {
       newMap.onload = () => {
         const x = newMap.width * parseInt(coords[0]) * this.mapConfig.scale;
         const y = newMap.height * parseInt(coords[1]) * this.mapConfig.scale;
+        /**
+         * On fait variabilise la partie d'afficahge des images pour pouvoir les redessiner sans avoir à les recharger
+         * @see redrawMap
+         */
         const draw = () => {
           this.ctx.drawImage(newMap, x, y, newMap.width* this.mapConfig.scale, newMap.height * this.mapConfig.scale);
           this.drawCells(x, y);
@@ -69,12 +82,19 @@ export class MapContainerComponent implements AfterViewInit {
     });
   }
 
+  /**
+   * va chercher les fonctions d'affichage de toutes les parties de map pour les réafficher
+   */
   private redrawMap(): void {
     this.images.forEach(drawFunction => {
       drawFunction();
     })
   }
 
+  /**
+   * Affiche les cellules pour une partie de la carte donnée.
+   * Appellée à la fin de l'affichage des parties de carte pour dessiner la grille correspondante à cette partie de carte
+   */
   private drawCells(x, y): void {
     for (let i = 0 ; i < this.mapConfig.cellsByRowOrCol ; i++){
       for (let j = 0 ; j < this.mapConfig.cellsByRowOrCol ; j ++) {
@@ -88,7 +108,10 @@ export class MapContainerComponent implements AfterViewInit {
     this.drawMap();*/
   }
 
-  private drawPosition(x, y){
+  /**
+   * Dessine un cercle rouge à la position du joueur
+   */
+  private drawPosition(x, y): void{
     this.ctx.fillStyle= '#CD5C5C';
     this.ctx.beginPath();
     this.ctx.arc((x + 90) * this.cellConfig.cellWidth + this.cellConfig.cellWidth / 2,
@@ -98,17 +121,35 @@ export class MapContainerComponent implements AfterViewInit {
   }
 
 
+  /**
+   * renvoie les coordonnées de la cellule sur laquelle l'utilisateur a cliqué
+   * On utilise 'LayerX' de l'évènement de clic qui permet de trouver la position sur la carte malgré le scroll
+   */
   public click(event): void {
     const x = -90 + Math.floor(event.layerX / this.cellConfig.cellWidth);
     const y = -120 + Math.floor(event.layerY / this.cellConfig.cellHeight);
-    alert(x + ' ; ' + y);
+    this.clickOnCell.emit({x, y});
 
   }
 
-  private scroll(x, y){
+  /**
+   * Se déplace jusqu'à centrer la carte sur la cellule aux coordonnées en paramètres
+   */
+  private scroll(x, y): void{
     const mapContainer = document.getElementsByClassName('drag-scroll-content')[0];
     mapContainer.scrollTo((x + 90) * this.cellConfig.cellWidth - mapContainer.clientWidth / 2 ,
       (y + 120) * this.cellConfig.cellHeight - mapContainer.clientHeight /2 );
+  }
+
+
+  private handlePosition(): void {
+    if (this.displayPosition) {
+      this.store.select(BotStoreSelectors.coordinates).subscribe((coordinates) => {
+        this.redrawMap();
+        this.drawPosition(coordinates.x, coordinates.y);
+        this.scroll(coordinates.x, coordinates.y);
+      });
+    }
   }
 
 }

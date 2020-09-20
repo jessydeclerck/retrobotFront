@@ -1,5 +1,7 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab *ngFor="let job of jobs | keyvalue" [label]="job.value">
-    <app-harvest-control-panel [job]="job.value"></app-harvest-control-panel>
+    <app-harvest-control-panel [job]="job.value" (resourcesToHarvestChange)="selectedResources = $event"></app-harvest-control-panel>
   </mat-tab>
 </mat-tab-group>
+
+<app-map-builder ></app-map-builder>

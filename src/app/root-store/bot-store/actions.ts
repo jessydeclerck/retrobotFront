@@ -3,6 +3,7 @@ import {NewIncomingMessage} from "../../shared/models/socket-messages/new-incomi
 import {Gathering} from "../../shared/models/socket-messages/gathering";
 import {Gathered} from "../../shared/models/socket-messages/gathered";
 import {NewMap} from "../../shared/models/socket-messages/new-map";
+import {CellCoordinates} from "../../shared/models/cell-coordinates";
 
 
 export const handleMessage = createAction(
@@ -28,10 +29,7 @@ export const stopGathering = createAction(
 export const newMap = createAction(
   '[Communication] Entered New Map',
   props<{newMapNotif: NewMap}>()
-)
-
-
-
+);
 
 
 

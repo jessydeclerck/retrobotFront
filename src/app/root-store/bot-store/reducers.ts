@@ -26,7 +26,7 @@ export const BotReducer = createReducer(
       x: action.newMapNotif.x,
       y: action.newMapNotif.y
     }
-  }))
+  })),
 );
 
 function addOrRemoveMessageAlert(alerts: string[], newAlert: string): string[] {

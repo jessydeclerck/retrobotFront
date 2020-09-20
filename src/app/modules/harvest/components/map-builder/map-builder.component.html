@@ -1,0 +1,36 @@
+<section>
+  <h4>Itinéraire</h4>
+
+  <mat-button-toggle-group [(value)]="drawPathMode">
+    <mat-button-toggle value="move">
+      <mat-icon>directions_run</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="harvest">
+      <mat-icon>content_cut</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="bank">
+      <mat-icon>account_balance</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="startMap">
+      <mat-icon>flag</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="bankMap">
+      <mat-icon>monetization_on</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+  <mat-button-toggle-group [(value)]="direction">
+    <mat-button-toggle value="top">
+      <mat-icon>expand_less</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="right">
+      <mat-icon>chevron_right</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="left">
+      <mat-icon>chevron_left</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="bottom">
+      <mat-icon>expand_more</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+  <app-map-container (clickOnCell)="onClickOnCell($event)"></app-map-container>
+</section>

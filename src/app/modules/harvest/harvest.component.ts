@@ -11,6 +11,8 @@ export class HarvestComponent implements OnInit, OnDestroy {
 
   public jobs = Jobs;
 
+  public selectedResources=[];
+
 
   constructor() { }
 
