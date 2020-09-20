@@ -1,4 +1,14 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { mapfiles } from '../constants/mapfiles'
 import {DragScrollComponent} from "ngx-drag-scroll";
 import {Store} from "@ngrx/store";
@@ -15,13 +25,14 @@ import {ScriptStoreSelectors} from "../../root-store/script-store";
   templateUrl: './map-container.component.html',
   styleUrls: ['./map-container.component.scss']
 })
-export class MapContainerComponent implements AfterViewInit {
+export class MapContainerComponent implements AfterViewInit, OnDestroy {
 
   @Input()
   displayPosition: boolean;
 
   @Output()
   clickOnCell: EventEmitter<CellCoordinates> = new EventEmitter<CellCoordinates>();
+  private sub$;
 
   private ctx: CanvasRenderingContext2D;
   private images: any[] = [];
@@ -136,7 +147,7 @@ export class MapContainerComponent implements AfterViewInit {
   }
 
   private handleObservables(): void {
-    combineLatest([
+    this.sub$ = combineLatest([
       this.store.select(ScriptStoreSelectors.selectBankMap),
       this.store.select(ScriptStoreSelectors.selectStartMap),
       this.store.select(ScriptStoreSelectors.selectGatherPath),
@@ -158,7 +169,7 @@ export class MapContainerComponent implements AfterViewInit {
         this.drawGatherPathArrow(map, gatherPath[map].direction, gatherPath[map].gather ? '#0f8603' : '#0040ff');
       });
       Object.keys(bankPath).forEach((map) => {
-        this.drawGatherPathArrow(map, bankPath[map].direction, '#fc0000', true);
+        this.drawGatherPathArrow(map, bankPath[map].direction, '#664a03', true);
       });
     });
   }
@@ -235,6 +246,10 @@ export class MapContainerComponent implements AfterViewInit {
     this.ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
     this.ctx.moveTo(tox, toy);
     this.ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+  }
+
+  ngOnDestroy(): void {
+    this.sub$.unsubscribe();
   }
 
 

@@ -1,9 +1,7 @@
 import {Component} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {RootStoreState} from "../../../../root-store";
-import {BotStoreActions} from "../../../../root-store/bot-store";
 import {CellCoordinates} from "../../../../shared/models/cell-coordinates";
-import {mapId} from "../../../../shared/constants/mapId";
 import {ScriptStoreActions} from "../../../../root-store/script-store";
 
 @Component({

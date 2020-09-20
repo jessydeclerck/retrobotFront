@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DataService} from "../../shared/services/data.service";
+import {WebsocketService} from "../../shared/services/websocket.service";
 
 @Component({
   selector: 'app-execution',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExecutionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private websocket: WebsocketService) { }
 
   ngOnInit(): void {
   }
 
+  public stopBot(): void {
+    this.websocket.sendMessage('stop');
+  }
 }

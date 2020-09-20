@@ -10,6 +10,7 @@ import { LogsComponent } from './components/logs/logs.component';
 import {SharedModule} from '../../shared/shared.module';
 import {MatTableModule} from "@angular/material/table";
 import {MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {MatCardModule} from "@angular/material/card";
     SharedModule,
     MatTableModule,
     MatCardModule,
+    MatButtonModule,
   ]
 })
 export class ExecutionModule { }
