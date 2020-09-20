@@ -36,6 +36,7 @@ export class MapBuilderComponent {
       case 'bank':
         newMap[`${cell.x};${cell.y}`] = {direction: this.direction};
         this.store.dispatch(ScriptStoreActions.addMapToBankPath({newMap}));
+        break;
       default:
         alert('Sélectionnez une action');
         break;
