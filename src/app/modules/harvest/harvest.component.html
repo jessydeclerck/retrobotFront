@@ -1,10 +1,5 @@
 <mat-tab-group mat-align-tabs="center">
-  <mat-tab label="Paysan"></mat-tab>
-  <mat-tab label="Bucheron"></mat-tab>
-  <mat-tab label="Mineur"></mat-tab>
+  <mat-tab *ngFor="let job of jobs | keyvalue" [label]="job.value">
+    <app-harvest-control-panel [job]="job.value"></app-harvest-control-panel>
+  </mat-tab>
 </mat-tab-group>
-
-<section>
-  <router-outlet></router-outlet>
-</section>
-

@@ -1,4 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Jobs} from "../../shared/enums/jobs.enum";
+import {resourcesData} from "../../shared/constants/resourcesData";
 
 @Component({
   selector: 'app-harvest',
@@ -7,13 +9,16 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 })
 export class HarvestComponent implements OnInit, OnDestroy {
 
+  public jobs = Jobs;
+
+
   constructor() { }
 
   ngOnInit() {
-
   }
 
   ngOnDestroy(): void {
   }
+
 
 }

@@ -1,0 +1,7 @@
+<mat-selection-list [(ngModel)]="selectedResources">
+  <mat-list-option *ngFor="let resource of resources | keyvalue"
+                   [value]="resource.key"
+                   [hidden]="true">
+    {{resource.value.name}}
+  </mat-list-option>
+</mat-selection-list>
