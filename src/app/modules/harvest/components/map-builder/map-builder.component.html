@@ -1,7 +1,7 @@
+<h4>Itinéraire</h4>
 <section>
-  <h4>Itinéraire</h4>
-
-  <mat-button-toggle-group [(value)]="drawPathMode">
+  <mat-button-toggle-group [(value)]="drawPathMode"
+                           [vertical]="true">
     <mat-button-toggle value="move">
       <mat-icon>directions_run</mat-icon>
     </mat-button-toggle>
@@ -18,7 +18,11 @@
       <mat-icon>monetization_on</mat-icon>
     </mat-button-toggle>
   </mat-button-toggle-group>
-  <mat-button-toggle-group [(value)]="direction">
+
+  <app-map-container (clickOnCell)="onClickOnCell($event)"></app-map-container>
+
+  <mat-button-toggle-group [(value)]="direction"
+                           [vertical]="true">
     <mat-button-toggle value="top">
       <mat-icon>expand_less</mat-icon>
     </mat-button-toggle>
@@ -32,5 +36,4 @@
       <mat-icon>expand_more</mat-icon>
     </mat-button-toggle>
   </mat-button-toggle-group>
-  <app-map-container (clickOnCell)="onClickOnCell($event)"></app-map-container>
 </section>
