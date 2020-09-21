@@ -1,5 +1,10 @@
 <h3> Etre alerté par les messages de type</h3>
 
+<mat-form-field>
+  <mat-label>Identifiant Discord</mat-label>
+  <input matInput type="number" [(ngModel)]="discordId" [disabled]="!isEditingDiscordId">
+</mat-form-field>
+<button mat-button (click)="editDiscordId()">{{isEditingDiscordId ? 'Valider' : 'Modifier'}}</button>
 <mat-chip-list multiple>
   <mat-chip *ngFor="let type of messageTypes | keyvalue"
             (click)="AlertMessageType(type.key)" color="primary"

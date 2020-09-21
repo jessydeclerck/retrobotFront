@@ -9,3 +9,14 @@ section {
   flex-direction: column;
   justify-content: center;
 }
+
+.confirm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error {
+  font-style: italic;
+  color: red;
+}

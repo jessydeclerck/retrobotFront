@@ -19,7 +19,7 @@ export class HarvestComponent implements OnInit {
   public selectedResources=[];
 
 
-  private script$ = combineLatest([
+  public script$ = combineLatest([
     this.store.select(ScriptStoreSelectors.selectToGather),
     this.store.select(ScriptStoreSelectors.selectBankMap),
     this.store.select(ScriptStoreSelectors.selectStartMap),

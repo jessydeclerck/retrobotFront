@@ -3,13 +3,18 @@ import {Actions, createEffect, ofType,} from "@ngrx/effects";
 import {Store} from "@ngrx/store";
 import {RootStoreState} from "../index";
 import * as actions from './actions';
-import {map, tap, withLatestFrom} from "rxjs/operators";
+import {catchError, exhaustMap, map, mergeMap, tap, withLatestFrom} from "rxjs/operators";
 import {BotStoreSelectors} from "./index";
 import {MessageType} from "../../shared/enums/message-type.enum";
+import {discordId} from "./selectors";
+import {HttpClient} from "@angular/common/http";
+import {of} from "rxjs";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class BotEffects {
   constructor(private action$: Actions,
+              private http: HttpClient,
               private readonly store: Store<RootStoreState.State>) {}
 
   handleMessage$ = createEffect( () =>
@@ -28,8 +33,34 @@ export class BotEffects {
   alertUser$ = createEffect(() =>
   this.action$.pipe(
     ofType(actions.alertUser),
-    tap((action) => alert(action.alert))
-  ), {dispatch: false});
+    withLatestFrom(this.store.select(BotStoreSelectors.discordId)),
+    map(([action, discordId]) => {
+      if (discordId) {
+        return actions.alertUserWithDiscord({alert: action.alert, discordId: discordId});
+      } else {
+        return actions.doNothing();
+      }
+    })
+  ));
 
+  alertUserWithDiscord$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(actions.alertUserWithDiscord),
+      mergeMap(action =>
+        this.http.post<any>(`${environment.retrobotDiscordUrl}/api/dm/sendMessage`,
+          JSON.stringify({userId: action.discordId.toString(), messageContent: action.alert}))
+          .pipe(
+            map(attributesGroups => actions.alertUserWithInNavigator({alert: action.alert})),
+            catchError(error => of(actions.doNothing()))
+          )
+        )
+      )
+    );
+
+  alertUserInNavigator$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(actions.alertUserWithInNavigator),
+      tap((action) => alert(action.alert))
+    ), {dispatch: false});
 
 }

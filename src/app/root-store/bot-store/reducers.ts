@@ -27,6 +27,10 @@ export const BotReducer = createReducer(
       y: action.newMapNotif.y
     }
   })),
+  on(actions.editDiscordId, (state, action) => ({
+    ...state,
+    discordId: action.discordId
+  })),
 );
 
 function addOrRemoveMessageAlert(alerts: string[], newAlert: string): string[] {

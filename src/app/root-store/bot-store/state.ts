@@ -4,6 +4,7 @@ import {CellCoordinates} from "../../shared/models/cell-coordinates";
 export interface State {
   activityLogs: string[];
   messageAlerts: string[];
+  discordId: number;
   looting?: number;
   coordinates: CellCoordinates;
   loot: any;
@@ -12,6 +13,7 @@ export interface State {
 export const initialState: State = {
   activityLogs: [],
   messageAlerts: [],
+  discordId: null,
   loot: {},
   coordinates: null,
 }

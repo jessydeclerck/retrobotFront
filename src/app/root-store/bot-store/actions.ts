@@ -31,14 +31,27 @@ export const newMap = createAction(
   props<{newMapNotif: NewMap}>()
 );
 
-
-
 export const alertUser = createAction(
   '[UI] Alert User',
+  props<{alert: string}>()
+);
+
+export const alertUserWithDiscord = createAction(
+  '[UI] Alert User with discord',
+  props<{alert: string, discordId: number}>()
+);
+
+export const alertUserWithInNavigator = createAction(
+  '[UI] Alert User in navigator',
   props<{alert: string}>()
 );
 
 export const doNothing = createAction(
   '[UI] Do Nothing',
 );
+
+export const editDiscordId = createAction(
+  '[UI] Edit Discord Id',
+  props<{discordId: number}>()
+)
 

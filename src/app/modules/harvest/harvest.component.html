@@ -6,7 +6,12 @@
   </mat-tab-group>
   <div class="map">
     <app-map-builder></app-map-builder>
-    <button mat-button (click)="useScript()">Lancer l'exécution</button>
+    <div *ngIf="script$ | async as script" class="confirm">
+      <div class="error" *ngIf="!script[2]"> Veuillez déclarer un point de départ</div>
+      <div class="error" *ngIf="!script[1]"> Veuillez déclarer une banque</div>
+      <div class="error" *ngIf="!script[0].length"> Sélectionnez au moins une ressource à récolter</div>
+      <button mat-button (click)="useScript()">Lancer l'exécution</button>
+    </div>
   </div>
 
 </section>

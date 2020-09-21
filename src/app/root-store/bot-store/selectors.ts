@@ -10,5 +10,5 @@ export const logs = (state: State) => state.bot.activityLogs;
 
 export const coordinates = (state: State) => state.bot.coordinates;
 
-
+export const discordId = (state: State) => state.bot.discordId;
 
