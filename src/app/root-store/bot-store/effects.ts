@@ -38,7 +38,7 @@ export class BotEffects {
       if (discordId) {
         return actions.alertUserWithDiscord({alert: action.alert, discordId: discordId});
       } else {
-        return actions.doNothing();
+        return actions.alertUserWithInNavigator({alert: action.alert});
       }
     })
   ));

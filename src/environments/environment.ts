@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   retrobotDiscordUrl: 'http://localhost:8080',
+  localBot: 'ws://localhost:80',
 };
 
 /*

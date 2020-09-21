@@ -6,6 +6,7 @@ import {NewIncomingMessage} from "../models/socket-messages/new-incoming-message
 import {Gathering} from "../models/socket-messages/gathering";
 import {Gathered} from "../models/socket-messages/gathered";
 import {NewMap} from "../models/socket-messages/new-map";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,9 @@ export class WebsocketService {
   private webSocket: WebSocket;
 
   constructor(private readonly store: Store<RootStoreState.State>) {
-    this.webSocket = new WebSocket('ws://localhost:80');
+    this.webSocket = new WebSocket(environment.localBot);
     this.webSocket.onmessage = this.handleMessage;
-  }a
+  }
 
   public sendMessage(message: any) {
     this.webSocket.send(message);
