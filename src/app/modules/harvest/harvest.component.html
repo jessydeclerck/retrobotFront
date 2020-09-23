@@ -10,7 +10,12 @@
       <div class="error" *ngIf="!script[2]"> Veuillez déclarer un point de départ</div>
       <div class="error" *ngIf="!script[1]"> Veuillez déclarer une banque</div>
       <div class="error" *ngIf="!script[0].length"> Sélectionnez au moins une ressource à récolter</div>
-      <button mat-button (click)="useScript()">Lancer l'exécution</button>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Nom du script" [(ngModel)]="scriptName">
+        </mat-form-field>
+        <button mat-button (click)="useScript()">Lancer l'exécution</button>
+      </div>
     </div>
   </div>
 

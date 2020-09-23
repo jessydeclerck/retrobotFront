@@ -17,6 +17,7 @@ export class HarvestComponent implements OnInit {
   public jobs = Jobs;
 
   public selectedResources=[];
+  public scriptName: string = '';
 
 
   public script$ = combineLatest([
@@ -39,7 +40,7 @@ export class HarvestComponent implements OnInit {
     this.script$
       .pipe(take(1))
       .subscribe(([toGather, bankMap, startMap, gatherPath, bankPath]) => {
-          this.data.useScript(toGather, bankMap, startMap, gatherPath, bankPath);
+          this.data.useScript(toGather, bankMap, startMap, gatherPath, bankPath, this.scriptName);
       });
   }
 

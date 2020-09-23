@@ -12,9 +12,19 @@ export class DataService {
   constructor(private readonly websocket: WebsocketService) {
   }
 
-  public useScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any): void {
-    const script = this.prepareScript(toGather, bankMap, startMap, gatherPath, bankPath);
-    this.websocket.sendMessage(JSON.stringify(script));
+  public useScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any, scriptName: string): void {
+    const toSend = {
+      scriptName,
+      script: this.prepareScript(toGather, bankMap, startMap, gatherPath, bankPath),
+      displayData: {
+        toGather,
+        startMap,
+        bankMap,
+        gatherPath,
+        bankPath,
+      },
+    };
+    this.websocket.sendMessage(JSON.stringify(toSend));
   }
 
   private prepareScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any): BotConfiguration {
