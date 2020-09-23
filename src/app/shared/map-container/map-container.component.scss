@@ -2,4 +2,21 @@ drag-scroll {
   height: 40vh;
   width: 40vw;
 }
+div #position-tooltip{
+  display: none;
+  z-index: 12;
+}
 
+div:hover #position-tooltip {
+  display:block;
+  position:fixed;
+  overflow:hidden;
+}
+
+#position-tooltip {
+  background-color: rgba(66, 66, 66, 0.7);
+  padding-right: 0.5vw;
+  padding-left: 0.5vw;
+  border-radius: 25px;
+  color: white;
+}

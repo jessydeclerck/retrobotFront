@@ -37,6 +37,8 @@ export class MapContainerComponent implements AfterViewInit, OnDestroy {
   private ctx: CanvasRenderingContext2D;
   private images: any[] = [];
 
+  public cellPosition: string = '';
+
   @ViewChild('mapContainer', {read: DragScrollComponent}) ds: DragScrollComponent;
 
   public mapConfig = {
@@ -144,7 +146,11 @@ export class MapContainerComponent implements AfterViewInit, OnDestroy {
   public logcoordinates(event): void {
     const x = -90 + Math.floor(event.layerX / this.cellConfig.cellWidth);
     const y = -120 + Math.floor(event.layerY / this.cellConfig.cellHeight);
-    console.log(x, y);
+
+    const mapPosition = document.getElementById('position-tooltip');
+    mapPosition.style.top = (event.y + 20) + 'px';
+    mapPosition.style.left = (event.x + 20) + 'px';
+    this.cellPosition = `${x};${y}`;
   }
 
   /**
