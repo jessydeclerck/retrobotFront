@@ -3,6 +3,13 @@ section {
   flex-direction: row;
   justify-content: center;
 }
+
 h4 {
   text-align: center;
+  margin-bottom: 0;
+}
+
+.mat-form-field {
+  display: flex;
+  justify-content: center;
 }

@@ -13,6 +13,7 @@ export class MapBuilderComponent {
 
   public drawPathMode: string;
   public direction: string = 'top';
+  public scriptName: string = '';
 
   constructor(private readonly store: Store<RootStoreState.State>) {
   }
