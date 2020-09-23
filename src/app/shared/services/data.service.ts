@@ -24,6 +24,7 @@ export class DataService {
         bankPath,
       },
     };
+    console.log(toSend);
     this.websocket.sendMessage(JSON.stringify(toSend));
   }
 
