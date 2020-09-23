@@ -16,8 +16,7 @@ export class WebsocketService {
   private webSocket: WebSocket;
 
   constructor(private readonly store: Store<RootStoreState.State>) {
-    this.webSocket = new WebSocket(environment.localBot);
-    this.webSocket.onmessage = this.handleMessage;
+    this.connect()
   }
 
   public sendMessage(message: any) {
@@ -48,6 +47,16 @@ export class WebsocketService {
         alert(`Pouvez-vous transmettre aux dev que la petite chaussette ${parsedMessage.type} est cassée SVP ?`);
     }
 
+  }
+
+  private connect = () => {
+    this.webSocket = new WebSocket(environment.localBot);
+    this.webSocket.onmessage = this.handleMessage;
+    this.webSocket.onopen = () => console.log("Websocket connected");
+    this.webSocket.onclose = () => {
+      console.log("Websocket closed, reconnect attempt...");
+      setTimeout(() => this.connect(), 2000);
+    }
   }
 
 }
