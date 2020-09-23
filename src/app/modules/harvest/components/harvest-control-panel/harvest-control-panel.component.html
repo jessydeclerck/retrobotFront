@@ -1,5 +1,5 @@
 <mat-selection-list [ngModel]="resourcesToHarvest$ | async" (ngModelChange)="newResourcesToHarvest($event)" dense>
-  <mat-list-option *ngFor="let resource of resources | keyvalue"
+  <mat-list-option checkboxPosition="before" *ngFor="let resource of resources | keyvalue"
                    [value]="resource.key"
                    [hidden]="true">
     {{resource.value.name}}
