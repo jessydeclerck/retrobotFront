@@ -138,6 +138,16 @@ export class MapContainerComponent implements AfterViewInit, OnDestroy {
   }
 
   /**
+   * renvoie les coordonnées de la cellule sur laquelle l'utilisateur a cliqué
+   * On utilise 'LayerX' de l'évènement de clic qui permet de trouver la position sur la carte malgré le scroll
+   */
+  public logcoordinates(event): void {
+    const x = -90 + Math.floor(event.layerX / this.cellConfig.cellWidth);
+    const y = -120 + Math.floor(event.layerY / this.cellConfig.cellHeight);
+    console.log(x, y);
+  }
+
+  /**
    * Se déplace jusqu'à centrer la carte sur la cellule aux coordonnées en paramètres
    */
   private scroll(x, y): void{

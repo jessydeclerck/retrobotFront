@@ -5,7 +5,7 @@
                    [scrollbar-hidden]="true">
     <canvas #mapCanvas  [width]="mapConfig.width * mapConfig.mapShardWidth * mapConfig.scale"
             [height]="mapConfig.height * mapConfig.mapShardHeight * mapConfig.scale"
-            (click)="click($event)">
+            (click)="click($event)" (mousemove)="logcoordinates($event)">
     </canvas>
   </drag-scroll>
 </div>
