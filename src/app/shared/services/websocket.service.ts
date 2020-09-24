@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {RootStoreState} from "../../root-store";
 import {BotStoreActions} from "../../root-store/bot-store";
@@ -42,6 +42,10 @@ export class WebsocketService {
       case 'map':
         const newMapNotif = new NewMap(parsedMessage);
         this.store.dispatch(BotStoreActions.newMap({newMapNotif}));
+        break;
+      case 'scripts':
+        //TODO handle scripts
+        console.log('Script list has been received')
         break;
       default:
         alert(`Pouvez-vous transmettre aux dev que la petite chaussette ${parsedMessage.type} est cassée SVP ?`);
