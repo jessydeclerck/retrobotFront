@@ -14,6 +14,7 @@ export class DataService {
 
   public useScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any, scriptName: string, characterName: string): void {
     const toSend = {
+      type: 'script',
       scriptName,
       script: this.prepareScript(toGather, bankMap, startMap, gatherPath, bankPath, characterName),
       displayData: {

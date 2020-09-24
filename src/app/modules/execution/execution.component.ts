@@ -15,6 +15,6 @@ export class ExecutionComponent implements OnInit {
   }
 
   public stopBot(): void {
-    this.websocket.sendMessage({type: 'stop'});
+    this.websocket.sendMessage(JSON.stringify({type: 'stop'}));
   }
 }
