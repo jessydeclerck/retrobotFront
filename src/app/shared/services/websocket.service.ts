@@ -7,6 +7,9 @@ import {Gathering} from "../models/socket-messages/gathering";
 import {Gathered} from "../models/socket-messages/gathered";
 import {NewMap} from "../models/socket-messages/new-map";
 import {environment} from "../../../environments/environment";
+import {ScriptStoreActions} from "../../root-store/script-store";
+import {BotConfiguration} from "../models/bot-configuration";
+import {LoadedScript} from "../models/loaded-script";
 
 @Injectable({
   providedIn: 'root'
@@ -44,8 +47,8 @@ export class WebsocketService {
         this.store.dispatch(BotStoreActions.newMap({newMapNotif}));
         break;
       case 'scripts':
-        //TODO handle scripts
-        console.log('Script list has been received')
+        const newScripts: LoadedScript[] = this.parseLoadedScripts(parsedMessage.scripts);
+        this.store.dispatch(ScriptStoreActions.receiveScripts({newScripts}));
         break;
       default:
         alert(`Pouvez-vous transmettre aux dev que la petite chaussette ${parsedMessage.type} est cassée SVP ?`);
@@ -61,6 +64,24 @@ export class WebsocketService {
       console.log("Websocket closed, reconnect attempt...");
       setTimeout(() => this.connect(), 2000);
     }
+  }
+
+  private parseLoadedScripts(parsedScripts): LoadedScript[] {
+    const scripts: LoadedScript[] = [];
+    parsedScripts.forEach((parsedScript) => {
+      const script: LoadedScript = new class implements LoadedScript {
+        data: any;
+        characterName: string;
+        scriptName: string;
+      };
+      script.scriptName = parsedScript.scriptName.split('.json')[0];
+      script.data = parsedScript.script.displayData;
+      script.characterName = parsedScript.script.characterName;
+      scripts.push(script);
+    });
+    console.log(scripts);
+    console.log(parsedScripts);
+    return scripts;
   }
 
 }

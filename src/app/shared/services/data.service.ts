@@ -12,7 +12,7 @@ export class DataService {
   constructor(private readonly websocket: WebsocketService) {
   }
 
-  public useScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any, scriptName: string, characterName: string): void {
+  public useScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any, characterName: string, scriptName: string): void {
     const toSend = {
       type: 'script',
       scriptName,

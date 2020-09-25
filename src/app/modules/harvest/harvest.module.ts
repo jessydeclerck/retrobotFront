@@ -14,23 +14,25 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
   declarations: [HarvestComponent, HarvestControlPanelComponent, MapBuilderComponent],
-  imports: [
-    CommonModule,
-    HarvestRoutingModule,
-    MatTabsModule,
-    MatListModule,
-    MatButtonToggleModule,
-    FormsModule,
-    SharedModule,
-    MatIconModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-  ]
+    imports: [
+        CommonModule,
+        HarvestRoutingModule,
+        MatTabsModule,
+        MatListModule,
+        MatButtonToggleModule,
+        FormsModule,
+        SharedModule,
+        MatIconModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+    ]
 })
 export class HarvestModule { }

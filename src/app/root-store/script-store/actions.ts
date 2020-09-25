@@ -1,5 +1,6 @@
 import {createAction, props} from "@ngrx/store";
 import {CellCoordinates} from "../../shared/models/cell-coordinates";
+import {LoadedScript} from "../../shared/models/loaded-script";
 
 export const changeSelectedResources = createAction(
   '[script] change resources',
@@ -25,3 +26,24 @@ export const addMapToBankPath = createAction(
   '[Script] add map to bank path',
   props<{newMap: any}>()
 );
+
+export const changeCharacterName = createAction(
+  '[script] change character name',
+  props<{newName: string}>()
+);
+
+export const changeScriptName = createAction(
+  '[script] change script name',
+  props<{newName: string}>()
+);
+
+export const receiveScripts = createAction(
+  '[scripts] New script list',
+  props<{newScripts: LoadedScript[]}>()
+);
+
+export const loadScript = createAction(
+  '[script] Load',
+  props<{script: LoadedScript}>()
+);
+
