@@ -27,7 +27,9 @@
       <div class="error" *ngIf="!script[1]"> Veuillez déclarer une banque</div>
       <div class="error" *ngIf="!script[0].length"> Sélectionnez au moins une ressource à récolter</div>
       <div>
-        <button mat-button [disabled]="!script[2] || !script[1] || !script[0].length" (click)="useScript()">Lancer l'exécution</button>
+        <button mat-button [disabled]="!script[2] || !script[1] || !script[0].length || !script[5].length || !script[6].length" (click)="useScript()">Lancer l'exécution</button>
+        ou
+        <button mat-button [disabled]="!script[2] || !script[1] || !script[0].length || !script[5].length || !script[6].length" (click)="export()">Exporter</button>
       </div>
     </div>
   </div>

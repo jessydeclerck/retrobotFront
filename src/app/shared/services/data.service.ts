@@ -3,6 +3,7 @@ import {BotConfiguration} from "../models/bot-configuration";
 import {CellCoordinates} from "../models/cell-coordinates";
 import {mapId} from "../constants/mapId";
 import {WebsocketService} from "./websocket.service";
+import * as FileSaver from "file-saver";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,26 @@ import {WebsocketService} from "./websocket.service";
 export class DataService {
 
   constructor(private readonly websocket: WebsocketService) {
+  }
+
+  public exportScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any, characterName: string, scriptName: string): void{
+    const toExport = {
+      type: 'script',
+      scriptName,
+      script: this.prepareScript(toGather, bankMap, startMap, gatherPath, bankPath, characterName),
+      displayData: {
+        toGather,
+        startMap,
+        bankMap,
+        gatherPath,
+        bankPath,
+      },
+    };
+    const fileName = `${toExport.scriptName}.json`
+    const file = new Blob([JSON.stringify(toExport, null, 2)],{
+      type: 'application/json',
+    });
+    FileSaver.saveAs(file, fileName);
   }
 
   public useScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any, characterName: string, scriptName: string): void {
@@ -25,7 +46,6 @@ export class DataService {
         bankPath,
       },
     };
-    console.log(toSend);
     this.websocket.sendMessage(JSON.stringify(toSend));
   }
 

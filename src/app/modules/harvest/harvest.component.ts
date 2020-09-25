@@ -51,6 +51,14 @@ export class HarvestComponent implements OnInit {
       });
   }
 
+  export() {
+    this.script$
+      .pipe(take(1))
+      .subscribe(([toGather, bankMap, startMap, gatherPath, bankPath, charName, scriptName]) => {
+        this.data.exportScript(toGather, bankMap, startMap, gatherPath, bankPath, charName, scriptName);
+      });
+  }
+
 
   newScriptName(newName): void {
     this.store.dispatch(ScriptStoreActions.changeScriptName({newName}));
