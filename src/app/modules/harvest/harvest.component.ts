@@ -51,12 +51,37 @@ export class HarvestComponent implements OnInit {
       });
   }
 
-  export() {
+  exportFile() {
     this.script$
       .pipe(take(1))
       .subscribe(([toGather, bankMap, startMap, gatherPath, bankPath, charName, scriptName]) => {
         this.data.exportScript(toGather, bankMap, startMap, gatherPath, bankPath, charName, scriptName);
       });
+  }
+
+  onImport(event) {
+    const file = event.target.files[0];
+    if (file) {
+      var reader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+      reader.onload = (evt) => {
+        if (typeof evt.target.result === "string") {
+         const parsedScript = JSON.parse(evt.target.result);
+          const script: LoadedScript = new class implements LoadedScript {
+            data: any;
+            characterName: string;
+            scriptName: string;
+          };
+          script.scriptName = parsedScript.scriptName.split('.json')[0];
+          script.data = parsedScript.displayData;
+          script.characterName = parsedScript.script.characterName;
+          this.store.dispatch(ScriptStoreActions.loadScript({script}));
+        }
+      }
+      reader.onerror = function (evt) {
+        console.log('error reading file');
+      }
+    }
   }
 
 

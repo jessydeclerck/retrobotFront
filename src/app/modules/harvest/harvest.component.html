@@ -20,6 +20,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <input type="file" (change)="onImport($event)"/>
     </div>
     <app-map-builder></app-map-builder>
     <div *ngIf="script$ | async as script" class="confirm">
@@ -29,7 +30,7 @@
       <div>
         <button mat-button [disabled]="!script[2] || !script[1] || !script[0].length || !script[5].length || !script[6].length" (click)="useScript()">Lancer l'exécution</button>
         ou
-        <button mat-button [disabled]="!script[2] || !script[1] || !script[0].length || !script[5].length || !script[6].length" (click)="export()">Exporter</button>
+        <button mat-button [disabled]="!script[2] || !script[1] || !script[0].length || !script[5].length || !script[6].length" (click)="exportFile()">Exporter</button>
       </div>
     </div>
   </div>

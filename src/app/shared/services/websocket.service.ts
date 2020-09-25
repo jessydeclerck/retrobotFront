@@ -79,8 +79,6 @@ export class WebsocketService {
       script.characterName = parsedScript.script.characterName;
       scripts.push(script);
     });
-    console.log(scripts);
-    console.log(parsedScripts);
     return scripts;
   }
 
