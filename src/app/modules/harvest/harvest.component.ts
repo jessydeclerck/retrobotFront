@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Jobs} from "../../shared/enums/jobs.enum";
 import {Store} from "@ngrx/store";
 import {RootStoreState} from "../../root-store";
@@ -8,6 +8,7 @@ import {take} from "rxjs/operators";
 import {DataService} from "../../shared/services/data.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {LoadedScript} from "../../shared/models/loaded-script";
+import {MatExpansionPanel} from "@angular/material/expansion";
 
 @Component({
   selector: 'app-harvest',
@@ -25,6 +26,8 @@ export class HarvestComponent implements OnInit {
   charName$: Observable<string> = this.store.select(ScriptStoreSelectors.selectCharacterName);
 
   loadedScripts$: Observable<LoadedScript[]> = this.store.select(ScriptStoreSelectors.selectLoadedScripts);
+
+  @ViewChild('expansionPanel') expansionPanel : MatExpansionPanel;
 
   public script$ = combineLatest([
     this.store.select(ScriptStoreSelectors.selectToGather),
@@ -76,6 +79,7 @@ export class HarvestComponent implements OnInit {
           script.data = parsedScript.displayData;
           script.characterName = parsedScript.script.characterName;
           this.store.dispatch(ScriptStoreActions.loadScript({script}));
+          this.expansionPanel.close();
         }
       }
       reader.onerror = function (evt) {
@@ -95,6 +99,7 @@ export class HarvestComponent implements OnInit {
 
   public loadScript(script: LoadedScript): void {
     this.store.dispatch(ScriptStoreActions.loadScript({script}));
+    this.expansionPanel.close();
   }
 
 }

@@ -15,6 +15,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {MatSelectModule} from "@angular/material/select";
         MatInputModule,
         ReactiveFormsModule,
         MatSelectModule,
+        MatExpansionModule,
     ]
 })
 export class HarvestModule { }

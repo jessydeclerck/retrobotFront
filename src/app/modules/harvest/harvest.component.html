@@ -6,21 +6,38 @@
   </mat-tab-group>
   <div class="map">
     <div>
-      <mat-form-field>
-        <input matInput placeholder="Nom du script" [ngModel]="scriptName$ | async" (ngModelChange)="newScriptName($event)">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Nom du personnage" [ngModel]="charName$ | async" (ngModelChange)="newCharName($event)">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Charger</mat-label>
-        <mat-select (valueChange)="loadScript($event)">
-          <mat-option *ngFor="let loadedScript of loadedScripts$ | async" [value]="loadedScript">
-            {{loadedScript.scriptName}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <input type="file" (change)="onImport($event)"/>
+      <mat-expansion-panel hideToggle class="mat-elevation-z0" #expansionPanel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Charger un script :
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="fields">
+          <div>
+            <mat-form-field>
+              <mat-label>Scripts</mat-label>
+              <mat-select (valueChange)="loadScript($event)">
+                <mat-option *ngFor="let loadedScript of loadedScripts$ | async" [value]="loadedScript">
+                  {{loadedScript.scriptName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <input type="file" (change)="onImport($event)"/>
+          </div>
+        </div>
+      </mat-expansion-panel>
+
+
+      <div class="fields">
+        <mat-form-field>
+          <input matInput placeholder="Nom du script" [ngModel]="scriptName$ | async" (ngModelChange)="newScriptName($event)">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Nom du personnage" [ngModel]="charName$ | async" (ngModelChange)="newCharName($event)">
+        </mat-form-field>
+      </div>
     </div>
     <app-map-builder></app-map-builder>
     <div *ngIf="script$ | async as script" class="confirm">
