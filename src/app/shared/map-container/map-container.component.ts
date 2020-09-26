@@ -182,10 +182,14 @@ export class MapContainerComponent implements AfterViewInit, OnDestroy {
         this.drawCircleInCell(startMap.x, startMap.y, '#01ff22')
       }
       Object.keys(gatherPath).forEach((map) => {
-        this.drawGatherPathArrow(map, gatherPath[map].direction, gatherPath[map].gather ? '#0f8603' : '#0040ff');
+        if (gatherPath[map]) {
+          this.drawGatherPathArrow(map, gatherPath[map].direction, gatherPath[map].gather ? '#0f8603' : '#0040ff');
+        }
       });
       Object.keys(bankPath).forEach((map) => {
-        this.drawGatherPathArrow(map, bankPath[map].direction, '#664a03', true);
+        if(bankPath[map]) {
+          this.drawGatherPathArrow(map, bankPath[map].direction, '#664a03', true);
+        }
       });
     });
   }

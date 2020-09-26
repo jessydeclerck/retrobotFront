@@ -19,6 +19,7 @@ export class MapBuilderComponent {
 
   public onClickOnCell(cell: CellCoordinates): void {
     const newMap = {}
+    console.log(this.direction);
     switch (this.drawPathMode) {
       case 'startMap':
         this.store.dispatch(ScriptStoreActions.changeStartMap({newMapId: cell}));
@@ -28,11 +29,11 @@ export class MapBuilderComponent {
         break;
       case 'move':
       case 'harvest':
-        newMap[`${cell.x},${cell.y}`] = {direction: this.direction, gather: this.drawPathMode === 'harvest'};
+        newMap[`${cell.x},${cell.y}`] = this.direction === 'delete' ? undefined : {direction: this.direction, gather: this.drawPathMode === 'harvest'};
         this.store.dispatch(ScriptStoreActions.addMapToPath({newMap}));
         break;
       case 'bank':
-        newMap[`${cell.x},${cell.y}`] = {direction: this.direction};
+        newMap[`${cell.x},${cell.y}`] = this.direction === 'delete' ? undefined : {direction: this.direction};
         this.store.dispatch(ScriptStoreActions.addMapToBankPath({newMap}));
         break;
       default:
