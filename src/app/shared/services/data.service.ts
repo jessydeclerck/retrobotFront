@@ -4,6 +4,7 @@ import {CellCoordinates} from "../models/cell-coordinates";
 import {mapId} from "../constants/mapId";
 import {WebsocketService} from "./websocket.service";
 import * as FileSaver from "file-saver";
+import {banks} from "../constants/banks";
 
 @Injectable({
   providedIn: 'root'
@@ -50,14 +51,21 @@ export class DataService {
   }
 
   private prepareScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any, characterName: string): BotConfiguration {
-    return {
+    const idBankIn = banks.find(bank => bank.coords.x === bankMap.x && bank.coords.y === bankMap.y).idIn
+    const idBankOut = banks.find(bank => bank.coords.x === bankMap.x && bank.coords.y === bankMap.y).idOut
+    const script =  {
       toGather,
       characterName,
-      bankMapId: mapId[`${bankMap.x},${bankMap.y}`],
+      bankMapId: idBankIn,
       startMapId: mapId[`${startMap.x},${startMap.y}`],
       gatherPath: this.preparePath(gatherPath, mapId),
-      bankPath: this.preparePath(bankPath, mapId),
+      bankPath: {
+        ...this.preparePath(bankPath, mapId),
+      },
     };
+    script.bankPath[idBankIn] = {direction: 'out', nextMapId: idBankOut};
+    script.bankPath[idBankOut] = {direction: 'in', nextMapId: idBankIn};
+    return script;
   }
 
   preparePath(path: any, mapId: any): any {

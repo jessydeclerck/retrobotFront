@@ -1,10 +1,8 @@
-import {CellCoordinates} from "./cell-coordinates";
-
 export interface BotConfiguration {
   toGather: string[];
-  startMapId: CellCoordinates;
+  startMapId: string | number;
   characterName: string;
-  bankMapId: CellCoordinates;
+  bankMapId: string | number;
   gatherPath: any;
   bankPath: any;
 }

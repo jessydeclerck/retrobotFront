@@ -3,6 +3,7 @@ import {Store} from "@ngrx/store";
 import {RootStoreState} from "../../../../root-store";
 import {CellCoordinates} from "../../../../shared/models/cell-coordinates";
 import {ScriptStoreActions} from "../../../../root-store/script-store";
+import {banks} from "../../../../shared/constants/banks";
 
 @Component({
   selector: 'app-map-builder',
@@ -14,6 +15,8 @@ export class MapBuilderComponent {
   public drawPathMode: string;
   public direction: string = 'top';
 
+  public banklist = banks;
+
   constructor(private readonly store: Store<RootStoreState.State>) {
   }
 
@@ -23,9 +26,6 @@ export class MapBuilderComponent {
     switch (this.drawPathMode) {
       case 'startMap':
         this.store.dispatch(ScriptStoreActions.changeStartMap({newMapId: cell}));
-        break;
-      case 'bankMap':
-        this.store.dispatch(ScriptStoreActions.changeBankMap({newMapId: cell}));
         break;
       case 'move':
       case 'harvest':
@@ -40,6 +40,10 @@ export class MapBuilderComponent {
         alert('Sélectionnez une action');
         break;
     }
+  }
+
+  public changeBank (cell: CellCoordinates): void {
+    this.store.dispatch(ScriptStoreActions.changeBankMap({newMapId: cell}));
   }
 
 }

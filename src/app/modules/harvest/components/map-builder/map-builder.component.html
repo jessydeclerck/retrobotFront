@@ -14,9 +14,9 @@
     <mat-button-toggle value="startMap">
       <mat-icon>flag</mat-icon>
     </mat-button-toggle>
-    <mat-button-toggle value="bankMap">
+    <button mat-button [matMenuTriggerFor]="menu">
       <mat-icon>monetization_on</mat-icon>
-    </mat-button-toggle>
+    </button>
   </mat-button-toggle-group>
 
   <app-map-container (clickOnCell)="onClickOnCell($event)"></app-map-container>
@@ -40,3 +40,8 @@
     </mat-button-toggle>
   </mat-button-toggle-group>
 </section>
+
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item *ngFor="let bank of banklist" (click)="changeBank(bank.coords)">{{bank.name}}</button>
+</mat-menu>
