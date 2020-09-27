@@ -51,7 +51,10 @@ export class MapContainerComponent implements AfterViewInit, OnDestroy {
     scale: 1
   }
 
-  public cellConfig;
+  public cellConfig = {
+    cellHeight: Math.round(this.mapConfig.mapShardHeight / this.mapConfig.cellsByRowOrCol * this.mapConfig.scale),
+    cellWidth: Math.round(this.mapConfig.mapShardWidth / this.mapConfig.cellsByRowOrCol * this.mapConfig.scale),
+  };
   @ViewChild('mapCanvas') mapRef: ElementRef<HTMLCanvasElement>;
 
   constructor(private readonly store: Store<RootStoreState.State>) { }
