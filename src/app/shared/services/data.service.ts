@@ -16,9 +16,7 @@ export class DataService {
 
   public exportScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any, characterName: string, scriptName: string): void{
     const toExport = {
-      type: 'script',
-      scriptName,
-      script: this.prepareScript(toGather, bankMap, startMap, gatherPath, bankPath, characterName),
+      ...this.prepareScript(toGather, bankMap, startMap, gatherPath, bankPath, characterName),
       displayData: {
         toGather,
         startMap,
@@ -27,7 +25,7 @@ export class DataService {
         bankPath,
       },
     };
-    const fileName = `${toExport.scriptName}.json`
+    const fileName = `${scriptName}.json`
     const file = new Blob([JSON.stringify(toExport, null, 2)],{
       type: 'application/json',
     });

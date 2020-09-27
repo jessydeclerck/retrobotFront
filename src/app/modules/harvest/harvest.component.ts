@@ -75,9 +75,9 @@ export class HarvestComponent implements OnInit {
             characterName: string;
             scriptName: string;
           };
-          script.scriptName = parsedScript.scriptName.split('.json')[0];
+          script.scriptName = file.name.split('.json')[0];
           script.data = parsedScript.displayData;
-          script.characterName = parsedScript.script.characterName;
+          script.characterName = parsedScript.characterName;
           this.store.dispatch(ScriptStoreActions.loadScript({script}));
           this.expansionPanel.close();
         }
