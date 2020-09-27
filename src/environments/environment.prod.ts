@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  retrobotDiscordUrl: 'http://localhost:8080',
+  localBot: 'ws://localhost:80',
 };
