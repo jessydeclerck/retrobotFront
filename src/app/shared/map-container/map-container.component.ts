@@ -13,10 +13,10 @@ import { mapfiles } from '../constants/mapfiles'
 import {DragScrollComponent} from "ngx-drag-scroll";
 import {Store} from "@ngrx/store";
 import {RootStoreState} from "../../root-store";
-import {combineLatest, Observable} from "rxjs";
+import {combineLatest, Observable, Subject} from "rxjs";
 import {CellCoordinates} from "../models/cell-coordinates";
 import {BotStoreSelectors} from "../../root-store/bot-store";
-import {map, take} from "rxjs/operators";
+import {map, take, takeUntil} from "rxjs/operators";
 import {coordinates} from "../../root-store/bot-store/selectors";
 import {ScriptStoreSelectors} from "../../root-store/script-store";
 
@@ -32,7 +32,8 @@ export class MapContainerComponent implements AfterViewInit, OnDestroy {
 
   @Output()
   clickOnCell: EventEmitter<CellCoordinates> = new EventEmitter<CellCoordinates>();
-  private sub$;
+
+  private onDestroy$ = new Subject();
 
   private ctx: CanvasRenderingContext2D;
   private images: any[] = [];
@@ -163,13 +164,14 @@ export class MapContainerComponent implements AfterViewInit, OnDestroy {
   }
 
   private handleObservables(): void {
-    this.sub$ = combineLatest([
+    combineLatest([
       this.store.select(ScriptStoreSelectors.selectBankMap),
       this.store.select(ScriptStoreSelectors.selectStartMap),
       this.store.select(ScriptStoreSelectors.selectGatherPath),
       this.store.select(ScriptStoreSelectors.selectBankPath),
       this.store.select(BotStoreSelectors.coordinates),
-    ]).subscribe(([bankMap, startMap, gatherPath, bankPath, coordinates]) => {
+    ]).pipe(takeUntil(this.onDestroy$))
+      .subscribe(([bankMap, startMap, gatherPath, bankPath, coordinates]) => {
       this.redrawMap();
       if (this.displayPosition && coordinates){
         this.drawCircleInCell(coordinates.x, coordinates.y, '#CD5C5C');
@@ -269,7 +271,7 @@ export class MapContainerComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub$.unsubscribe();
+    this.onDestroy$.next();
   }
 
 
