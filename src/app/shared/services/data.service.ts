@@ -89,6 +89,10 @@ export class DataService {
           default:
             return null;
         }
+        if(!mapId[map]) {
+          alert(`il y a un problème avec les informations de la map ${map}, Merci de prévenir les développeurs et de ne pas l'utiliser dans votre script`);
+          throw `Pas d'ID pour la map ${map}`;
+        }
         preparedPath[mapId[map]] = {
           direction: path[map].direction,
           nextMapId: mapId[`${nextMap[0]},${nextMap[1]}`],
