@@ -127,7 +127,7 @@ export const resourcesData = {
   },
   7533: {
     name: 'Trefle a 5 feuilles',
-    metier: [Jobs.PECHEUR]
+    metier: [Jobs.ALCHIMISTE]
   },
   7534: {
     name: 'Menthe Sauvage',
