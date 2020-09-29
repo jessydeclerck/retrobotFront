@@ -13,6 +13,8 @@ jobs:
         uses: actions/checkout@master
       - name: Install Dependencies
         run: npm install
+      - name: Install cli
+        run: npm install -g @angular/cli
       - name: Build
         run: ng build --prod
       - name: Archive Production Artifact
