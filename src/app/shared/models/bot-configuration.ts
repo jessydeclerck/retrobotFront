@@ -5,4 +5,5 @@ export interface BotConfiguration {
   bankMapId: string | number;
   gatherPath: any;
   bankPath: any;
+  paysan: boolean;
 }

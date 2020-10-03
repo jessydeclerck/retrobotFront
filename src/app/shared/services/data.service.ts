@@ -14,9 +14,9 @@ export class DataService {
   constructor(private readonly websocket: WebsocketService) {
   }
 
-  public exportScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any, characterName: string, scriptName: string): void{
+  public exportScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any, characterName: string, scriptName: string, isPaysan: boolean): void{
     const toExport = {
-      ...this.prepareScript(toGather, bankMap, startMap, gatherPath, bankPath, characterName),
+      ...this.prepareScript(toGather, bankMap, startMap, gatherPath, bankPath, characterName, isPaysan),
       displayData: {
         toGather,
         startMap,
@@ -32,11 +32,11 @@ export class DataService {
     FileSaver.saveAs(file, fileName);
   }
 
-  public useScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any, characterName: string, scriptName: string): void {
+  public useScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any, characterName: string, scriptName: string, isPaysan: boolean): void {
     const toSend = {
       type: 'script',
       scriptName,
-      script: this.prepareScript(toGather, bankMap, startMap, gatherPath, bankPath, characterName),
+      script: this.prepareScript(toGather, bankMap, startMap, gatherPath, bankPath, characterName, isPaysan),
       displayData: {
         toGather,
         startMap,
@@ -48,11 +48,12 @@ export class DataService {
     this.websocket.sendMessage(JSON.stringify(toSend));
   }
 
-  private prepareScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any, characterName: string): BotConfiguration {
+  private prepareScript(toGather: string[], bankMap: CellCoordinates, startMap: CellCoordinates, gatherPath: any, bankPath: any, characterName: string, paysan: boolean): BotConfiguration {
     const idBankIn = banks.find(bank => bank.coords.x === bankMap.x && bank.coords.y === bankMap.y).idIn
     const idBankOut = banks.find(bank => bank.coords.x === bankMap.x && bank.coords.y === bankMap.y).idOut
     const script =  {
       toGather,
+      paysan,
       characterName,
       bankMapId: idBankIn,
       startMapId: mapId[`${startMap.x},${startMap.y}`],

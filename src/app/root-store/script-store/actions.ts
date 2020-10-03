@@ -47,3 +47,8 @@ export const loadScript = createAction(
   props<{script: LoadedScript}>()
 );
 
+export const changeIsPaysan = createAction(
+  '[script] change is Paysan',
+  props<{newValue: boolean}>()
+)
+

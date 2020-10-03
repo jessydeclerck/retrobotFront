@@ -1,5 +1,5 @@
 <section>
-  <mat-tab-group mat-align-tabs="center" >
+  <mat-tab-group mat-align-tabs="center" (selectedIndexChange)="changeJob($event, jobs)">
     <mat-tab *ngFor="let job of jobs | keyvalue" [label]="job.value" [disabled]="job.value === 'Mineur'">
       <app-harvest-control-panel [job]="job.value" (resourcesToHarvestChange)="selectedResources = $event"></app-harvest-control-panel>
     </mat-tab>
