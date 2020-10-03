@@ -16,5 +16,7 @@ export const selectScriptName = (state: State) => state.script.scriptName;
 
 export const selectLoadedScripts = (state: State) => state.script.scripts;
 
+export const selectIsPaysan = (state: State) => state.script.isPaysan;
+
 
 

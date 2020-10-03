@@ -11,6 +11,7 @@ export interface State {
   scriptName: string;
   characterName: string;
   scripts: LoadedScript[];
+  isPaysan: boolean;
 }
 
 export const initialState: State = {
@@ -22,5 +23,6 @@ export const initialState: State = {
   scriptName: '',
   characterName: '',
   scripts: [],
+  isPaysan: false,
 }
 

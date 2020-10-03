@@ -73,10 +73,12 @@ export class WebsocketService {
         data: any;
         characterName: string;
         scriptName: string;
+        paysan: boolean;
       };
       script.scriptName = parsedScript.scriptName.split('.json')[0];
       script.data = parsedScript.script.displayData;
       script.characterName = parsedScript.script.characterName;
+      script.paysan = parsedScript.script.paysan || false;
       scripts.push(script);
     });
     return scripts;

@@ -1,7 +1,7 @@
 export enum Jobs {
-  BUCHERON = 'Bûcheron',
-  PAYSAN = 'Paysan',
   ALCHIMISTE = 'Alchimiste',
-  PECHEUR = 'Pêcheur',
+  BUCHERON = 'Bûcheron',
   MINEUR = 'Mineur',
+  PAYSAN = 'Paysan',
+  PECHEUR = 'Pêcheur',
 }

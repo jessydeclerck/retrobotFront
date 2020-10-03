@@ -36,7 +36,8 @@ export class HarvestComponent implements OnInit {
     this.store.select(ScriptStoreSelectors.selectGatherPath),
     this.store.select(ScriptStoreSelectors.selectBankPath),
     this.store.select(ScriptStoreSelectors.selectCharacterName),
-    this.store.select(ScriptStoreSelectors.selectScriptName)
+    this.store.select(ScriptStoreSelectors.selectScriptName),
+    this.store.select(ScriptStoreSelectors.selectIsPaysan),
   ]);
 
   constructor(private readonly store: Store<RootStoreState.State>,
@@ -49,16 +50,16 @@ export class HarvestComponent implements OnInit {
   useScript() {
     this.script$
       .pipe(take(1))
-      .subscribe(([toGather, bankMap, startMap, gatherPath, bankPath, charName, scriptName]) => {
-          this.data.useScript(toGather, bankMap, startMap, gatherPath, bankPath, charName, scriptName);
+      .subscribe(([toGather, bankMap, startMap, gatherPath, bankPath, charName, scriptName, isPaysan]) => {
+          this.data.useScript(toGather, bankMap, startMap, gatherPath, bankPath, charName, scriptName, isPaysan);
       });
   }
 
   exportFile() {
     this.script$
       .pipe(take(1))
-      .subscribe(([toGather, bankMap, startMap, gatherPath, bankPath, charName, scriptName]) => {
-        this.data.exportScript(toGather, bankMap, startMap, gatherPath, bankPath, charName, scriptName);
+      .subscribe(([toGather, bankMap, startMap, gatherPath, bankPath, charName, scriptName, isPaysan]) => {
+        this.data.exportScript(toGather, bankMap, startMap, gatherPath, bankPath, charName, scriptName, isPaysan);
       });
   }
 
@@ -74,10 +75,12 @@ export class HarvestComponent implements OnInit {
             data: any;
             characterName: string;
             scriptName: string;
+            paysan: boolean;
           };
           script.scriptName = file.name.split('.json')[0];
           script.data = parsedScript.displayData;
           script.characterName = parsedScript.characterName;
+          script.paysan = parsedScript.paysan || false;
           this.store.dispatch(ScriptStoreActions.loadScript({script}));
           this.expansionPanel.close();
         }
@@ -100,6 +103,14 @@ export class HarvestComponent implements OnInit {
   public loadScript(script: LoadedScript): void {
     this.store.dispatch(ScriptStoreActions.loadScript({script}));
     this.expansionPanel.close();
+  }
+
+  public changeJob(event, jobs) {
+    let newValue = false;
+    if (Object.keys(jobs)[event] === 'PAYSAN'){
+      newValue = true;
+    }
+    this.store.dispatch(ScriptStoreActions.changeIsPaysan({newValue}));
   }
 
 }

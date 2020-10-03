@@ -46,5 +46,10 @@ export const ScriptReducer = createReducer(
     gatherPath: action.script.data.gatherPath,
     characterName: action.script.characterName,
     toGather: action.script.data.toGather,
+    isPaysan: action.script.paysan,
+  })),
+  on(actions.changeIsPaysan, (state, action) => ({
+    ...state,
+    isPaysan: action.newValue,
   }))
 )
